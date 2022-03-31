@@ -7,15 +7,15 @@ import java.sql.Date;
 @Table(name=”actor”)
 public class ActorDAO {
 
-    @Id
-    long actor_id;
+    @Id(name="actor_id")
+    long actorID;
 
     @Column(name="first_name")
-    String FirstName; // VARCHAR(45) NOT NULL,
+    String firstName; // VARCHAR(45) NOT NULL,
 
     @Column(name="last_name")
-    String LastName; // VARCHAR(45) NOT NULL,
+    String lastName; // VARCHAR(45) NOT NULL,
 
     @Column(name="last_update")
-    Date LastUpdate // TIMESTAMP; // NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    Date lastUpdate; // TIMESTAMP; // NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 }
