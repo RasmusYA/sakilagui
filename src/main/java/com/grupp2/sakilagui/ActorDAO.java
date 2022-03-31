@@ -7,7 +7,8 @@ import java.sql.Date;
 @Table(name=”actor”)
 public class ActorDAO {
 
-    @Id(name="actor_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long actorID;
 
     @Column(name="first_name")
