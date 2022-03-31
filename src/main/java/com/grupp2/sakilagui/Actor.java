@@ -1,7 +1,9 @@
 package com.grupp2.sakilagui;
 
+import org.hibernate.mapping.List;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "actor")

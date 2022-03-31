@@ -15,18 +15,19 @@ public class Staff {
     @Column(name = "last_name")
     private String lastName;	//varchar(45)	NO
 
-    @Column(name = "address_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Address addressId;	    //smallint(5) unsigned	NO	MUL
+//    @Column(name = "address_id")
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Address addressId;	    //smallint(5) unsigned	NO	MUL
 
     @Column(name = "picture")
     private byte[] picture;     //blob	YES
     @Column(name = "email")
     private String email;	    //varchar(50)	YES
 
-    @Column(name = "store_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Store storeId;	    //tinyint(3) unsigned	NO	MUL
+// TODO Handle relation when Store
+//    @Column(name = "store_id")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Store> storeId;	    //tinyint(3) unsigned	NO	MUL
 
     @Column(name = "active")
     private Boolean active;	    //tinyint(1)	NO		1
@@ -42,4 +43,91 @@ public class Staff {
 
     }
 
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+//    public Address getAddressId() {
+//        return addressId;
+//    }
+//
+//    public void setAddressId(Address addressId) {
+//        this.addressId = addressId;
+//    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//    public Store getStoreId() {
+//        return storeId;
+//    }
+//
+//    public void setStoreId(Store storeId) {
+//        this.storeId = storeId;
+//    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }

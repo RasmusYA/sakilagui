@@ -1,27 +1,25 @@
 package com.grupp2.sakilagui;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Date;
 
 public class Payment {
     @Column(name = "payment_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private int paymentId;	            //smallint(5) unsigned
-
-    @Column(name = "customer_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Customer customerId;	            //	smallint(5) unsigned
+// TODO Handle relation when Customer class is up
+//    @Column(name = "customer_id")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Customer customerId;	            //	smallint(5) unsigned
 
     @Column(name = "staff_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Staff staffId;	            //	tinyint(3) unsigned
 
-    @Column(name = "rental_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Rental rentalId;	            //	int(11)
+    // TODO Handle relation when Rental class is up
+//    @Column(name = "rental_id")
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Rental rentalId;	            //	int(11)
 
     @Column(name = "amount")
     private double amount;	            //	decimal(5,2)
@@ -42,13 +40,14 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public Customer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
-    }
+// TODO Handle relation when Customer class is up
+//    public Customer getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(Customer customerId) {
+//        this.customerId = customerId;
+//    }
 
     public Staff getStaffId() {
         return staffId;
@@ -58,13 +57,14 @@ public class Payment {
         this.staffId = staffId;
     }
 
-    public Rental getRentalId() {
-        return rentalId;
-    }
-
-    public void setRentalId(Rental rentalId) {
-        this.rentalId = rentalId;
-    }
+// TODO Handle relation when Rental class is up
+//    public Rental getRentalId() {
+//        return rentalId;
+//    }
+//
+//    public void setRentalId(Rental rentalId) {
+//        this.rentalId = rentalId;
+//    }
 
     public double getAmount() {
         return amount;

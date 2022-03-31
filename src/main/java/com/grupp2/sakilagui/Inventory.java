@@ -10,13 +10,17 @@ public class Inventory {
     @Column(name = "payment_id")
     private int inventoryId;	    //mediumint(8) unsigned
 
-    @Column(name = "payment_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Film filmId;	        //smallint(5) unsigned
+    // TODO Handle relation when Film class is up
+//    @Column(name = "payment_id")
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Film filmId;	        //smallint(5) unsigned
 
-    @Column(name = "payment_id")
-    private int storeId;	        //tinyint(3) unsigned
-    @Column(name = "payment_id")
+    // TODO Handle relation when Rental class is up
+//    @Column(name = "payment_id")
+//    @OneToMany
+//    private List<Rental> storeId;	        //tinyint(3) unsigned
+
+    @Column(name = "last_update")
     private int lastUpdate;	    //timestamp
 
     public Inventory(){
@@ -31,21 +35,23 @@ public class Inventory {
         this.inventoryId = inventoryId;
     }
 
-    public Film getFilmId() {
-        return filmId;
-    }
+    // TODO Handle relation when Film class is up
+//    public Film getFilmId() {
+//        return filmId;
+//    }
+//
+//    public void setFilmId(Film filmId) {
+//        this.filmId = filmId;
+//    }
 
-    public void setFilmId(Film filmId) {
-        this.filmId = filmId;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
+    // TODO Handle relation when Store class is up
+//    public int getStoreId() {
+//        return storeId;
+//    }
+//
+//    public void setStoreId(int storeId) {
+//        this.storeId = storeId;
+//    }
 
     public int getLastUpdate() {
         return lastUpdate;
