@@ -3,6 +3,8 @@ package com.grupp2.sakilagui;
 import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@Table(name="film")
 public class FilmDAO {
     enum Rating {
         G,
@@ -14,7 +16,7 @@ public class FilmDAO {
 
 
     @Id
-    int film_id // SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    int film_id; // SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 
     @Column(name= "title")
     String title; // VARCHAR(128) NOT NULL,
