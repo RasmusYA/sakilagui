@@ -24,10 +24,10 @@ public class Staff {
     @Column(name = "email")
     private String email;	    //varchar(50)	YES
 
-// TODO Handle relation when Store
-//    @Column(name = "store_id")
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Store> storeId;	    //tinyint(3) unsigned	NO	MUL
+
+    @Column(name = "store_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Store storeId;	    //tinyint(3) unsigned	NO	MUL
 
     @Column(name = "active")
     private Boolean active;	    //tinyint(1)	NO		1
@@ -91,13 +91,13 @@ public class Staff {
         this.email = email;
     }
 
-//    public Store getStoreId() {
-//        return storeId;
-//    }
-//
-//    public void setStoreId(Store storeId) {
-//        this.storeId = storeId;
-//    }
+    public Store getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Store storeId) {
+        this.storeId = storeId;
+    }
 
     public Boolean getActive() {
         return active;

@@ -15,10 +15,9 @@ public class Inventory {
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private Film filmId;	        //smallint(5) unsigned
 
-    // TODO Handle relation when Rental class is up
-//    @Column(name = "payment_id")
-//    @OneToMany
-//    private List<Rental> storeId;	        //tinyint(3) unsigned
+    @Column(name = "store_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Rental storeId;	        //tinyint(3) unsigned
 
     @Column(name = "last_update")
     private int lastUpdate;	    //timestamp
@@ -44,14 +43,14 @@ public class Inventory {
 //        this.filmId = filmId;
 //    }
 
-    // TODO Handle relation when Store class is up
-//    public int getStoreId() {
-//        return storeId;
-//    }
-//
-//    public void setStoreId(int storeId) {
-//        this.storeId = storeId;
-//    }
+
+    public Rental getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Rental storeId) {
+        this.storeId = storeId;
+    }
 
     public int getLastUpdate() {
         return lastUpdate;

@@ -9,10 +9,7 @@ public class FilmCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
-    private int filmId; //TODO change from int to Film?           //	smallint(5) unsigned	NO	PRI
-//    TODO Handle relation when Film class is up
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Film filmId;            //	smallint(5) unsigned	NO	PRI
+    private int filmId;
 
     @Column(name = "category_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -25,14 +22,14 @@ public class FilmCategory {
 
     }
 
-    //    TODO Handle relation when Film class is up
-//    public Film getFilmId() {
-//        return filmId;
-//    }
-//
-//    public void setFilmId(Film filmId) {
-//        this.filmId = filmId;
-//    }
+
+    public int getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
+    }
 
     public Category getCategoryId() {
         return categoryId;

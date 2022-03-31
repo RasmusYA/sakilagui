@@ -1,41 +1,38 @@
 package com.grupp2.sakilagui;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "language")
+public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private int categoryId;            //	tinyint(3) unsigned	NO	PRI
-
+    @Column(name = "language_id")
+    private int languageId;            //	tinyint(3) unsigned	NO	PRI		auto_increment
     @Column(name = "name")
-    private int name;                               //	varchar(25)	NO
-
+    private String name;            //	char(20)	NO
     @Column(name = "last_update")
     private Date lastUpdate;            //	timestamp	NO		current_timestamp()	on update current_timestamp()
 
-
-    public Category(){
+    public Language(){
 
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getLanguageId() {
+        return languageId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

@@ -3,10 +3,14 @@ package com.grupp2.sakilagui;
 import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
+@Table(name = "payment")
 public class Payment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private int paymentId;	            //smallint(5) unsigned
+
 // TODO Handle relation when Customer class is up
 //    @Column(name = "customer_id")
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -16,10 +20,9 @@ public class Payment {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Staff staffId;	            //	tinyint(3) unsigned
 
-    // TODO Handle relation when Rental class is up
-//    @Column(name = "rental_id")
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Rental rentalId;	            //	int(11)
+    @Column(name = "rental_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Rental rentalId;	            //	int(11)
 
     @Column(name = "amount")
     private double amount;	            //	decimal(5,2)
@@ -57,14 +60,13 @@ public class Payment {
         this.staffId = staffId;
     }
 
-// TODO Handle relation when Rental class is up
-//    public Rental getRentalId() {
-//        return rentalId;
-//    }
-//
-//    public void setRentalId(Rental rentalId) {
-//        this.rentalId = rentalId;
-//    }
+    public Rental getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(Rental rentalId) {
+        this.rentalId = rentalId;
+    }
 
     public double getAmount() {
         return amount;

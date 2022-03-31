@@ -12,7 +12,7 @@ public class FilmActor {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Actor actorId;           //	smallint(5) unsigned	NO	PRI
 
-// TODO Handle relation when Store
+// TODO Handle relation when Film is up
 //    @Column(name = "film_id")
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private Film filmId;                //	smallint(5) unsigned	NO	PRI
@@ -33,7 +33,7 @@ public class FilmActor {
         this.actorId = actorId;
     }
 
-// TODO Handle relation when Store
+// TODO Handle relation when Film is Up
 //    public Film getFilmId() {
 //        return filmId;
 //    }
