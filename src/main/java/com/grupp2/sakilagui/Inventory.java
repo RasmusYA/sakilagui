@@ -7,44 +7,51 @@ import javax.persistence.*;
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int inventory_id;	//mediumint(8) unsigned
-    private int film_id;	        //smallint(5) unsigned
-    private int store_id;	    //tinyint(3) unsigned
-    private int last_update;	    //timestamp
+    @Column(name = "payment_id")
+    private int inventoryId;	    //mediumint(8) unsigned
+
+    @Column(name = "payment_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Film filmId;	        //smallint(5) unsigned
+
+    @Column(name = "payment_id")
+    private int storeId;	        //tinyint(3) unsigned
+    @Column(name = "payment_id")
+    private int lastUpdate;	    //timestamp
 
     public Inventory(){
 
     }
 
-    public int getInventory_id() {
-        return inventory_id;
+    public int getInventoryId() {
+        return inventoryId;
     }
 
-    public void setInventory_id(int inventory_id) {
-        this.inventory_id = inventory_id;
+    public void setInventoryId(int inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
-    public int getFilm_id() {
-        return film_id;
+    public Film getFilmId() {
+        return filmId;
     }
 
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilmId(Film filmId) {
+        this.filmId = filmId;
     }
 
-    public int getStore_id() {
-        return store_id;
+    public int getStoreId() {
+        return storeId;
     }
 
-    public void setStore_id(int store_id) {
-        this.store_id = store_id;
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
-    public int getLast_update() {
-        return last_update;
+    public int getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(int last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(int lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

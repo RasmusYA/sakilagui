@@ -1,51 +1,69 @@
 package com.grupp2.sakilagui;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import java.sql.Date;
 
 public class Payment {
+    @Column(name = "payment_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private int paymentId;	            //smallint(5) unsigned
 
-    private int payment_id;	        //smallint(5) unsigned
-    private int customer_id;	    //	smallint(5) unsigned
-    private int staff_id;	        //	tinyint(3) unsigned
-    private int rental_id;	        //	int(11)
+    @Column(name = "customer_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Customer customerId;	            //	smallint(5) unsigned
+
+    @Column(name = "staff_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Staff staffId;	            //	tinyint(3) unsigned
+
+    @Column(name = "rental_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Rental rentalId;	            //	int(11)
+
+    @Column(name = "amount")
     private double amount;	            //	decimal(5,2)
-    private Date payment_date;	    //	datetime
-    private Date last_update;	    //	timestamp
+    @Column(name = "payment_date")
+    private Date paymentDate;	        //	datetime
+    @Column(name = "last_update")
+    private Date lastUpdate;	        //	timestamp
 
     public Payment(){
 
     }
-    
-    public int getPayment_id() {
-        return payment_id;
+
+    public int getPaymentId() {
+        return paymentId;
     }
 
-    public void setPayment_id(int payment_id) {
-        this.payment_id = payment_id;
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public Customer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
     }
 
-    public int getStaff_id() {
-        return staff_id;
+    public Staff getStaffId() {
+        return staffId;
     }
 
-    public void setStaff_id(int staff_id) {
-        this.staff_id = staff_id;
+    public void setStaffId(Staff staffId) {
+        this.staffId = staffId;
     }
 
-    public int getRental_id() {
-        return rental_id;
+    public Rental getRentalId() {
+        return rentalId;
     }
 
-    public void setRental_id(int rental_id) {
-        this.rental_id = rental_id;
+    public void setRentalId(Rental rentalId) {
+        this.rentalId = rentalId;
     }
 
     public double getAmount() {
@@ -56,19 +74,19 @@ public class Payment {
         this.amount = amount;
     }
 
-    public Date getPayment_date() {
-        return payment_date;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
-    public void setPayment_date(Date payment_date) {
-        this.payment_date = payment_date;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
-    public Date getLast_update() {
-        return last_update;
+    public Date getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

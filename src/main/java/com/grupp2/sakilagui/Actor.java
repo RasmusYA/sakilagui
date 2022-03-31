@@ -8,44 +8,48 @@ import java.sql.Date;
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int actor_id;
-    private String first_name;
-    private String last_name;
-    private Date last_update;
+    @Column(name = "actor_id")
+    private int actorId;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "last_update")
+    private Date lastUpdate;
 
     public Actor(){
 
     }
 
-    public int getActor_id() {
-        return actor_id;
+    public int getActorId() {
+        return actorId;
     }
 
-    public void setActor_id(int actor_id) {
-        this.actor_id = actor_id;
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Date getLast_update() {
-        return last_update;
+    public Date getLastUpdate() {
+        return lastUpdate;
     }
 
-    public void setLast_update(Date last_update) {
-        this.last_update = last_update;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }
