@@ -8,9 +8,7 @@ import java.sql.Date;
 public class FilmActor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "actor_id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Actor actorId;           //	smallint(5) unsigned	NO	PRI
+    private int actorId;           //	smallint(5) unsigned	NO	PRI
 
 // TODO Handle relation when Film is up
 //    @Column(name = "film_id")
@@ -25,11 +23,11 @@ public class FilmActor {
 
     }
 
-    public Actor getActorId() {
+    public int getActorId() {
         return actorId;
     }
 
-    public void setActorId(Actor actorId) {
+    public void setActorId(int actorId) {
         this.actorId = actorId;
     }
 

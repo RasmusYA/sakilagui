@@ -2,6 +2,8 @@ package com.grupp2.sakilagui;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "staff")
@@ -25,8 +27,9 @@ public class Staff {
     private String email;	    //varchar(50)	YES
 
 
-    @Column(name = "store_id")
+    //@Column(name = "store_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
     private Store storeId;	    //tinyint(3) unsigned	NO	MUL
 
     @Column(name = "active")
@@ -38,9 +41,19 @@ public class Staff {
     @Column(name = "last_update")
     private Date lastUpdate;	//timestamp	NO		current_timestamp()	on update current_timestamp()
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Rental> rentals = new ArrayList<>();
 
     public Staff(){
 
+    }
+
+    public Collection<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Collection<Rental> rentals) {
+        this.rentals = rentals;
     }
 
     public int getStaffId() {

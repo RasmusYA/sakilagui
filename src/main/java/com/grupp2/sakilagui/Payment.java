@@ -16,12 +16,14 @@ public class Payment {
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private Customer customerId;	            //	smallint(5) unsigned
 
-    @Column(name = "staff_id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //@Column(name = "staff_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff")
     private Staff staffId;	            //	tinyint(3) unsigned
 
-    @Column(name = "rental_id")
+    //@Column(name = "rental_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "rental")
     private Rental rentalId;	            //	int(11)
 
     @Column(name = "amount")
