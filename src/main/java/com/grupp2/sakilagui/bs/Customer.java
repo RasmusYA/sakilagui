@@ -11,9 +11,10 @@ public class Customer {
     @Column(name = "customer_id")
     private int customerId;                 //smallint(5) unsigned  NO PRI  auto_increment
 
-    @Column(name = "store_id")
+    //@Column(name = "store_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private int storeId;                    //smallint(5)   NO
+    @JoinColumn(name = "store_id")
+    private Store storeId;                    //smallint(5)   NO
 
     @Column(name = "first_name")
     private String firstName;               //varchar(45)   NO
@@ -44,11 +45,11 @@ public class Customer {
         this.customerId = customerId;
     }
 
-    public int getStoreId() {
+    public Store getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(Store storeId) {
         this.storeId = storeId;
     }
 

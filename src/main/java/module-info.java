@@ -17,4 +17,5 @@ open module com.grupp2.sakilagui {
 
         //opens edu.petersson.wigellsconcert to javafx.fxml;
         exports com.grupp2.sakilagui;
+    exports com.grupp2.sakilagui.bs;
 }

@@ -20,9 +20,10 @@ public class Address {
     @Column(name = "district")
     private String district;            //varchar(20)   NO
 
-    @Column(name = "city_id")
+    //@Column(name = "city_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private int cityId;                 //smallint(5)   NO
+    @JoinColumn(name = "city_id")
+    private City cityId;                 //smallint(5)   NO
 
     @Column(name = "postal_code")
     private String postalCode;          //varchar(10)   YES
@@ -72,11 +73,11 @@ public class Address {
         this.district = district;
     }
 
-    public int getCityId() {
+    public City getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(City cityId) {
         this.cityId = cityId;
     }
 

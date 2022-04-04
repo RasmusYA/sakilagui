@@ -14,9 +14,10 @@ public class City {
     @Column(name = "city")
     private String city;                //varchar(50)   NO
 
-    @Column(name = "country_id")
+    //@Column(name = "country_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private int countryId;              //smallint(5)   NO
+    @JoinColumn(name = "country_id")
+    private Country countryId;              //smallint(5)   NO
 
     @Column(name = "last_update")
     private Date lastUpdate;            //timestamp     NO
@@ -41,11 +42,11 @@ public class City {
         this.city = city;
     }
 
-    public int getCountryId() {
+    public Country getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(Country countryId) {
         this.countryId = countryId;
     }
 
