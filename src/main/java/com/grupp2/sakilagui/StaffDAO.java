@@ -8,6 +8,7 @@ import java.sql.Date;
 @Table(name="staff")
 public class StaffDAO {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int staff_id; // TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
 
     @Column(name="first_name")
