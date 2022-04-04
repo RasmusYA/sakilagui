@@ -1,5 +1,7 @@
 package com.grupp2.sakilagui;
 
+import com.grupp2.sakilagui.bs.Rental;
+
 import javax.persistence.*;
 import java.util.List;
 

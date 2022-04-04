@@ -1,9 +1,8 @@
-package com.grupp2.sakilagui;
+package com.grupp2.sakilagui.bs;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "inventory")
