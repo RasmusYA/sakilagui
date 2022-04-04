@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name=”actor”)
+@Table(name= "actor")
 public class ActorDAO {
 
     @Id

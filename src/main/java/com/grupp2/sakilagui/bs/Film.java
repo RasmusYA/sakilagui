@@ -20,9 +20,10 @@ public class Film {
     @Column(name = "release_year")
     private int releaseYear;            //year          YES
 
-    @Column(name = "language_id")
+    //@Column(name = "language_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private int languageId;             //tinyint(3)    NO
+    @JoinColumn(name = "language_id")
+    private Language languageId;             //tinyint(3)    NO
 
     @Column(name = "original_language_id")
     private int originalLanguageId;     //tinyint(3)    YES
@@ -80,11 +81,11 @@ public class Film {
         this.releaseYear = releaseYear;
     }
 
-    public int getLanguageId() {
+    public Language getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(int languageId) {
+    public void setLanguageId(Language languageId) {
         this.languageId = languageId;
     }
 

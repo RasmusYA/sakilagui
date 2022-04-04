@@ -11,13 +11,15 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
+        RentalDAO rd = new RentalDAO();
+        rd.getAll();
         launch();
     }
 }
