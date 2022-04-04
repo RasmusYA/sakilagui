@@ -11,8 +11,9 @@ public class FilmCategory {
     @Column(name = "film_id")
     private int filmId;
 
-    @Column(name = "category_id")
+    //@Column(name = "category_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category")
     private Category categoryId;        //	tinyint(3) unsigned	NO	PRI
 
     @Column(name = "last_update")

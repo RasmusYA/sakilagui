@@ -1,7 +1,5 @@
 package com.grupp2.sakilagui;
 
-import org.hibernate.mapping.List;
-
 import javax.persistence.*;
 import java.util.Date;
 

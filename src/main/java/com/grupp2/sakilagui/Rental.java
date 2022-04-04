@@ -15,8 +15,9 @@ public class Rental {
     @Column(name = "rental_date")
     private Date rentalDate;      //	datetime	NO	MUL
 
-    @Column(name = "inventory_id")
+//    //@Column(name = "inventory_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="inventory_id")
     private Inventory inventoryId;      //	mediumint(8) unsigned	NO	MUL
 
     // TODO Handle relation when Customer is upp
@@ -27,9 +28,11 @@ public class Rental {
     @Column(name = "return_date")
     private Date returnDate;      //	datetime	YES
 
-    @Column(name = "staffId")
+    //@Column(name = "staffId")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Staff staff_id;      //	tinyint(3) unsigned	NO	MUL
+    @JoinColumn(name="staff_id")
+    private Staff staffId;      //	tinyint(3) unsigned	NO	MUL
+
 
     @Column(name = "last_update")
     private Date lastUpdate;      //	timestamp	NO		current_timestamp()	on update current_timestamp()
@@ -62,7 +65,7 @@ public class Rental {
         this.inventoryId = inventoryId;
     }
 
-    // TODO Handle relation when Store
+    // TODO Handle relation when Customer is upp
 //    public Customer getCustomerId() {
 //        return customerId;
 //    }
@@ -79,12 +82,12 @@ public class Rental {
         this.returnDate = returnDate;
     }
 
-    public Staff getStaff_id() {
-        return staff_id;
+    public Staff getStaffId() {
+        return staffId;
     }
 
-    public void setStaff_id(Staff staff_id) {
-        this.staff_id = staff_id;
+    public void setStaffId(Staff staffId) {
+        this.staffId = staffId;
     }
 
     public Date getLastUpdate() {
@@ -93,5 +96,15 @@ public class Rental {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return rentalId + " " +
+                 rentalDate + " " +
+                inventoryId + " " +
+                returnDate + " " +
+                staffId + " " +
+                lastUpdate + "\n";
     }
 }

@@ -1,13 +1,16 @@
 package com.grupp2.sakilagui;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "inventory")
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
+    @Column(name = "inventory_id")
     private int inventoryId;	    //mediumint(8) unsigned
 
     // TODO Handle relation when Film class is up
@@ -15,12 +18,25 @@ public class Inventory {
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private Film filmId;	        //smallint(5) unsigned
 
-    @Column(name = "store_id")
+    //@Column(name = "store_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Rental storeId;	        //tinyint(3) unsigned
+    @JoinColumn(name = "store_id")
+    private Store storeId;	        //tinyint(3) unsigned
 
     @Column(name = "last_update")
     private int lastUpdate;	    //timestamp
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<Rental> rentals = new ArrayList<>();
+
+    public Collection<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Collection<Rental> rentals) {
+        this.rentals = rentals;
+    }
 
     public Inventory(){
 
@@ -44,11 +60,11 @@ public class Inventory {
 //    }
 
 
-    public Rental getStoreId() {
+    public Store getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Rental storeId) {
+    public void setStoreId(Store storeId) {
         this.storeId = storeId;
     }
 
