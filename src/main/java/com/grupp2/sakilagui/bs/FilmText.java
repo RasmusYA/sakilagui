@@ -1,4 +1,4 @@
-package com.grupp2.sakilagui;
+package com.grupp2.sakilagui.bs;
 
 import javax.persistence.*;
 
