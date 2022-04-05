@@ -24,6 +24,23 @@ public class MainController implements Initializable {
     //Main Tab Pane
     @FXML private TabPane mainTabPane;
 
+    //Tabs
+    @FXML private Tab tabActor;
+    @FXML private Tab tabAddress;
+    @FXML private Tab tabCategory;
+    @FXML private Tab tabCity;
+    @FXML private Tab tabCountry;
+    @FXML private Tab tabCustomer;
+    @FXML private Tab tabFilm;
+    @FXML private Tab tabFilmActor;
+    @FXML private Tab tabFilmCategory;
+    @FXML private Tab tabFilmText;
+    @FXML private Tab tabInventory;
+    @FXML private Tab tabLanguage;
+    @FXML private Tab tabPayment;
+    @FXML private Tab tabStaff;
+    @FXML private Tab tabStore;
+
     //Rental
     @FXML private Tab tabRental;
     @FXML private TableView<Rental> tableRental;
