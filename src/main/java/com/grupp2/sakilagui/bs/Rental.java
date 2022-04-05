@@ -13,19 +13,20 @@ public class Rental {
     private int rentalId;      //	int(11)	NO	PRI		auto_increment
 
     @Column(name = "rental_date")
+    @Temporal(TemporalType.DATE)
     private Date rentalDate;      //	datetime	NO	MUL
 
 //    //@Column(name = "inventory_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="inventory_id")
+    @JoinColumn(name = "inventory_id")
     private Inventory inventoryId;      //	mediumint(8) unsigned	NO	MUL
 
-    // TODO Handle relation when Customer is upp
-//    @Column(name = "customer_id")
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Customer customerId;      //	smallint(5) unsigned	NO	MUL
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customerId;      //	smallint(5) unsigned	NO	MUL
 
     @Column(name = "return_date")
+    @Temporal(TemporalType.DATE)
     private Date returnDate;      //	datetime	YES
 
     //@Column(name = "staffId")
@@ -35,6 +36,7 @@ public class Rental {
 
 
     @Column(name = "last_update")
+    @Temporal(TemporalType.DATE)
     private Date lastUpdate;      //	timestamp	NO		current_timestamp()	on update current_timestamp()
 
     public Rental(){
@@ -65,14 +67,13 @@ public class Rental {
         this.inventoryId = inventoryId;
     }
 
-    // TODO Handle relation when Customer is upp
-//    public Customer getCustomerId() {
-//        return customerId;
-//    }
-//
-//    public void setCustomerId(Customer customerId) {
-//        this.customerId = customerId;
-//    }
+    public Customer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
+    }
 
     public Date getReturnDate() {
         return returnDate;
@@ -103,6 +104,7 @@ public class Rental {
         return rentalId + " " +
                  rentalDate + " " +
                 inventoryId + " " +
+                customerId + " " +
                 returnDate + " " +
                 staffId + " " +
                 lastUpdate + "\n";

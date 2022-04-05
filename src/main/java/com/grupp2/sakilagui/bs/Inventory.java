@@ -26,7 +26,7 @@ public class Inventory {
     private int lastUpdate;	    //timestamp
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "inventoryId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Rental> rentals = new ArrayList<>();
 
     public Collection<Rental> getRentals() {

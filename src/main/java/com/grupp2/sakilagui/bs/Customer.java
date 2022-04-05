@@ -1,6 +1,8 @@
 package com.grupp2.sakilagui.bs;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -36,6 +38,21 @@ public class Customer {
 
     @Column(name = "last_update")
     private Date lastUpdate;                //timestamp     YES
+
+    public Customer(){
+
+    }
+
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL)
+    private Collection<Rental> rentals = new ArrayList<>();
+
+    public Collection<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Collection<Rental> rentals) {
+        this.rentals = rentals;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -107,5 +124,10 @@ public class Customer {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return customerId + " ";
     }
 }

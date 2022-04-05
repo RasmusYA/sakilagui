@@ -44,7 +44,7 @@ public class RentalDAO {
 //                //System.out.println("Rasmus Test: " + o);
 //            }
 
-            List<Rental> rentalList = entityManager.createNativeQuery("SELECT * FROM rental LIMIT 10", Rental.class).getResultList();
+            List<Rental> rentalList = entityManager.createNativeQuery("SELECT * FROM rental LEFT JOIN inventory USING(inventory_id) LIMIT 10", Rental.class).getResultList();
             System.out.println(rentalList);
 
             transaction.commit();

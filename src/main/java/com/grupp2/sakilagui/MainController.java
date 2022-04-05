@@ -1,5 +1,6 @@
 package com.grupp2.sakilagui;
 
+import com.grupp2.sakilagui.bs.Customer;
 import com.grupp2.sakilagui.bs.Inventory;
 import com.grupp2.sakilagui.bs.Rental;
 import com.grupp2.sakilagui.bs.Staff;
@@ -12,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -30,9 +28,9 @@ public class MainController implements Initializable {
     @FXML private Tab tabRental;
     @FXML private TableView<Rental> tableRental;
     @FXML private TableColumn<Rental, Integer> colRental_Id;
-    @FXML private TableColumn<Rental, Inventory> colRental_inventoryId;
     @FXML private TableColumn<Rental, Date> colRental_date;
-    //@FXML private TableColumn<Rental, Customer> colRental_customerId;
+    @FXML private TableColumn<Rental, Inventory> colRental_inventoryId;
+    @FXML private TableColumn<Rental, Customer> colRental_customerId;
     @FXML private TableColumn<Rental, Date> colRental_returnDate;
     @FXML private TableColumn<Rental, Staff> colRental_staffId;
     @FXML private TableColumn<Rental, Date> colRental_lastUpdate;
@@ -44,13 +42,19 @@ public class MainController implements Initializable {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
         try {
+            //
             transaction = entityManager.getTransaction();
             transaction.begin();
-            List<Rental> rentalList = entityManager.createNativeQuery("SELECT * FROM rental LIMIT 10", Rental.class).getResultList();
+
+            List<Rental> rentalList = entityManager.createQuery("SELECT r FROM Rental r LEFT JOIN FETCH r.inventoryId", Rental.class).getResultList();
+            rentalList = entityManager.createQuery("SELECT r FROM Rental r LEFT JOIN FETCH r.customerId", Rental.class).getResultList();
+            rentalList = entityManager.createQuery("SELECT r FROM Rental r LEFT JOIN FETCH r.staffId", Rental.class).getResultList();
+
+
             colRental_Id.setCellValueFactory(new PropertyValueFactory<>("rentalId"));
-            colRental_inventoryId.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
-            colRental_date.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
-            //colRental_customerId.setCellValueFactory(new PropertyValueFactory<>("postCode"));
+            colRental_date.setCellValueFactory(new PropertyValueFactory<>("rentalDate"));
+            colRental_inventoryId.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+            colRental_customerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             colRental_returnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
             colRental_staffId.setCellValueFactory(new PropertyValueFactory<>("staffId"));
             colRental_lastUpdate.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
@@ -65,10 +69,11 @@ public class MainController implements Initializable {
         } finally {
             entityManager.close();
         }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        readFromRental();
     }
 }

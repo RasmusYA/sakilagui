@@ -41,7 +41,7 @@ public class Staff {
     @Column(name = "last_update")
     private Date lastUpdate;	//timestamp	NO		current_timestamp()	on update current_timestamp()
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "staffId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Rental> rentals = new ArrayList<>();
 
     public Staff(){

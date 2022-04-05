@@ -15,5 +15,4 @@
             <property name="hibernate.show.sql" value="true"/> <!-- Skriver ut i konsolen -->
         </properties>
     </persistence-unit>
-
 </persistence>

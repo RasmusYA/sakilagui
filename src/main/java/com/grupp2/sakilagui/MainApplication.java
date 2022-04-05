@@ -18,8 +18,6 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        RentalDAO rd = new RentalDAO();
-        rd.getAll();
         launch();
     }
 }
