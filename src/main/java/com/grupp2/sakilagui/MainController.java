@@ -121,11 +121,7 @@ public class MainController implements Initializable {
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
-                System.out.println(ex.getMessage());
-                System.out.println(ex.getCause());
                 transaction.rollback();
-                System.out.println(ex.getMessage());
-                System.out.println(ex.getCause());
             }
         } finally {
             entityManager.close();
@@ -184,11 +180,7 @@ public class MainController implements Initializable {
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
-                System.out.println(ex.getMessage());
-                System.out.println(ex.getCause());
                 transaction.rollback();
-                System.out.println(ex.getMessage());
-                System.out.println(ex.getCause());
             }
         } finally {
             entityManager.close();
