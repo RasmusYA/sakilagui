@@ -93,10 +93,10 @@ public class MainController implements Initializable {
     private ObservableList<Rental> rentalObservableList = FXCollections.observableArrayList();
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hibernate");
-    EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-    EntityTransaction transaction = null;
 
     public void readFromRental(){
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
         try {
             //
             transaction = entityManager.getTransaction();
@@ -120,14 +120,21 @@ public class MainController implements Initializable {
 
             transaction.commit();
         } catch (Exception ex) {
-            if (transaction != null)
+            if (transaction != null) {
+                System.out.println(ex.getMessage());
+                System.out.println(ex.getCause());
                 transaction.rollback();
+                System.out.println(ex.getMessage());
+                System.out.println(ex.getCause());
+            }
         } finally {
             entityManager.close();
         }
     }
 
     public void readFromActor() {
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
@@ -152,6 +159,8 @@ public class MainController implements Initializable {
     }
 
     public void readFromCustomer() {
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
@@ -174,14 +183,21 @@ public class MainController implements Initializable {
 
             transaction.commit();
         } catch (Exception ex) {
-            if (transaction != null)
+            if (transaction != null) {
+                System.out.println(ex.getMessage());
+                System.out.println(ex.getCause());
                 transaction.rollback();
+                System.out.println(ex.getMessage());
+                System.out.println(ex.getCause());
+            }
         } finally {
             entityManager.close();
         }
     }
 
     public void readFromFilm(){
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
@@ -208,8 +224,9 @@ public class MainController implements Initializable {
 
             transaction.commit();
         } catch (Exception ex) {
-            if (transaction != null)
+            if (transaction != null) {
                 transaction.rollback();
+            }
         } finally {
             entityManager.close();
         }
