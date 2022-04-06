@@ -1,5 +1,7 @@
 package com.grupp2.sakilagui.bs;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,10 +29,13 @@ public class Customer {
     @Column(name = "email")
     private String email;                   //varchar(50)   YES
 
-    @Column(name = "address_id")
-    private int addressId;                  //smallint(5)   NO
+    //@Column(name = "address_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address addressId;                  //smallint(5)   NO
 
-    @Column(name = "active")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    @Column(name = "active", columnDefinition = "TINYINT(1)", length = 1)
     private Boolean active;                 //tinyint(3)    NO
 
     @Column(name = "create_date")
@@ -94,11 +99,11 @@ public class Customer {
         this.email = email;
     }
 
-    public int getAddressId() {
+    public Address getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Address addressId) {
         this.addressId = addressId;
     }
 
@@ -128,6 +133,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return customerId + " ";
+        return firstName + lastName;
     }
 }

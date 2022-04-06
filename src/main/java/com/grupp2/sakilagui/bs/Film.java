@@ -25,8 +25,9 @@ public class Film {
     @JoinColumn(name = "language_id")
     private Language languageId;             //tinyint(3)    NO
 
-    @Column(name = "original_language_id")
-    private int originalLanguageId;     //tinyint(3)    YES
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "original_language_id")
+    private Language originalLanguageId;     //tinyint(3)    YES
 
     @Column(name = "rental_duration")
     private int rentalDuration;         //tinyint(3)    NO
@@ -48,6 +49,10 @@ public class Film {
 
     @Column(name = "last_update")
     private Date lastUpdate;            //timestamp     NO
+
+    public Film(){
+
+    }
 
     public int getFilmId() {
         return filmId;
@@ -89,11 +94,11 @@ public class Film {
         this.languageId = languageId;
     }
 
-    public int getOriginalLanguageId() {
+    public Language getOriginalLanguageId() {
         return originalLanguageId;
     }
 
-    public void setOriginalLanguageId(int originalLanguageId) {
+    public void setOriginalLanguageId(Language originalLanguageId) {
         this.originalLanguageId = originalLanguageId;
     }
 

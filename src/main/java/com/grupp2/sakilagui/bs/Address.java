@@ -1,6 +1,8 @@
 package com.grupp2.sakilagui.bs;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -31,11 +33,11 @@ public class Address {
     @Column(name = "phone")
     private String phone;               //varchar(20)   NO
 
-    @Column(name = "location")
-    private String location;            //geometry(??)  NO
-
     @Column(name = "last_update")
     private Date lastUpdate;            //timestamp     NO
+
+    @OneToMany(mappedBy = "addressId", cascade = CascadeType.ALL)
+    private Collection<Customer> customers = new ArrayList<>();
 
     public Address() {
 
@@ -47,6 +49,14 @@ public class Address {
 
     public void setAddressId(int addressId) {
         this.addressId = addressId;
+    }
+
+    public Collection<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Collection<Customer> customers) {
+        this.customers = customers;
     }
 
     public String getAddress() {
@@ -95,14 +105,6 @@ public class Address {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Date getLastUpdate() {
