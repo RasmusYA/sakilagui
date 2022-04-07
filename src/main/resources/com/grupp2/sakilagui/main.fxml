@@ -18,7 +18,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" onAction="#quitApplication" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -39,12 +39,12 @@
         <tabs>
           <Tab fx:id="tabActor" text="Actor">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tableActor" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Actor ID" />
-                      <TableColumn prefWidth="190.0" text="First Name" />
-                        <TableColumn prefWidth="165.0" text="Last Name" />
-                        <TableColumn prefWidth="160.0" text="Last Update" />
+                      <TableColumn fx:id="colActor_actorId" prefWidth="75.0" text="Actor ID" />
+                      <TableColumn fx:id="colActor_firstName" prefWidth="190.0" text="First Name" />
+                        <TableColumn fx:id="colActor_lastName" prefWidth="165.0" text="Last Name" />
+                        <TableColumn fx:id="colActor_lastUpdate" prefWidth="160.0" text="Last Update" />
                     </columns>
                   </TableView>
                </content>
@@ -101,38 +101,38 @@
             </Tab>
             <Tab fx:id="tabCustomer" text="Customer">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tableCustomer" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="93.0" text="Customer ID" />
-                      <TableColumn prefWidth="66.0" text="Store ID" />
-                        <TableColumn prefWidth="180.0" text="First Name" />
-                        <TableColumn prefWidth="170.0" text="Last Name" />
-                        <TableColumn prefWidth="164.0" text="Email" />
-                        <TableColumn prefWidth="83.0" text="Address ID" />
-                        <TableColumn prefWidth="60.0" text="Active" />
-                        <TableColumn prefWidth="98.0" text="Create Date" />
-                        <TableColumn prefWidth="97.0" text="Last Update" />
+                      <TableColumn fx:id="colCustomer_customerId" prefWidth="93.0" text="Customer ID" />
+                      <TableColumn fx:id="colCustomer_storeId" prefWidth="66.0" text="Store ID" />
+                        <TableColumn fx:id="colCustomer_firstName" prefWidth="180.0" text="First Name" />
+                        <TableColumn fx:id="colCustomer_lastName" prefWidth="170.0" text="Last Name" />
+                        <TableColumn fx:id="colCustomer_email" prefWidth="164.0" text="Email" />
+                        <TableColumn fx:id="colCustomer_addressId" prefWidth="83.0" text="Address ID" />
+                        <TableColumn fx:id="colCustomer_active" prefWidth="60.0" text="Active" />
+                        <TableColumn fx:id="colCustomer_createDate" prefWidth="98.0" text="Create Date" />
+                        <TableColumn fx:id="colCustomer_lastUpdate" prefWidth="97.0" text="Last Update" />
                     </columns>
                   </TableView>
                </content>
             </Tab>
             <Tab fx:id="tabFilm" text="Film">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tableFilm" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="67.0" text="Film ID" />
-                      <TableColumn prefWidth="83.0" text="Title" />
-                        <TableColumn prefWidth="75.0" text="Description" />
-                        <TableColumn prefWidth="75.0" text="Release Year" />
-                        <TableColumn prefWidth="75.0" text="Language ID" />
-                        <TableColumn prefWidth="75.0" text="Original Language ID" />
-                        <TableColumn prefWidth="75.0" text="Rental Duration" />
-                        <TableColumn prefWidth="96.0" text="Rental Rate" />
-                        <TableColumn prefWidth="54.0" text="Length" />
-                        <TableColumn prefWidth="75.0" text="Replacement Cost" />
-                        <TableColumn prefWidth="75.0" text="Rating" />
-                        <TableColumn prefWidth="107.0" text="Special Features" />
-                        <TableColumn prefWidth="78.0" text="Last Update" />
+                      <TableColumn fx:id="colFilm_filmId" prefWidth="54.0" text="Film ID" />
+                      <TableColumn fx:id="colFilm_title" prefWidth="96.0" text="Title" />
+                        <TableColumn fx:id="colFilm_description" prefWidth="75.0" text="Description" />
+                        <TableColumn fx:id="colFilm_releaseYear" prefWidth="75.0" text="Release Year" />
+                        <TableColumn fx:id="colFilm_languageId" prefWidth="83.0" text="Language ID" />
+                        <TableColumn fx:id="colFilm_originalLanguageId" prefWidth="32.0" text="Original Language ID" />
+                        <TableColumn fx:id="colFilm_rentalDuration" prefWidth="110.0" text="Rental Duration" />
+                        <TableColumn fx:id="colFilm_rentalRate" prefWidth="96.0" text="Rental Rate" />
+                        <TableColumn fx:id="colFilm_Length" prefWidth="54.0" text="Length" />
+                        <TableColumn fx:id="colFilm_replacementCost" prefWidth="75.0" text="Replacement Cost" />
+                        <TableColumn fx:id="colFilm_rating" prefWidth="75.0" text="Rating" />
+                        <TableColumn fx:id="colFilm_specialFeatures" prefWidth="107.0" text="Special Features" />
+                        <TableColumn fx:id="colFilm_lastUpdate" prefWidth="88.0" text="Last Update" />
                     </columns>
                   </TableView>
                </content>
@@ -260,22 +260,22 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="button" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+            <Button fx:id="button" mnemonicParsing="false" onAction="#readFromActor" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+            <Button fx:id="button1" mnemonicParsing="false" onAction="#readFromCustomer" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="button2" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+            <Button fx:id="button2" mnemonicParsing="false" onAction="#readFromFilm" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="button3" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+            <Button fx:id="button3" mnemonicParsing="false" onAction="#readFromRental" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
                <font>
                   <Font size="14.0" />
                </font>
