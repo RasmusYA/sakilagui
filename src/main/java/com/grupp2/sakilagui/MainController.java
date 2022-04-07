@@ -155,14 +155,8 @@ public class MainController implements Initializable {
     }
 
     public void readFromCustomer() {
-        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        EntityTransaction transaction = null;
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
 
-            List<Customer> customerList = entityManager.createQuery("SELECT c FROM Customer c LEFT JOIN FETCH c.storeId", Customer.class).getResultList();
-            customerList = entityManager.createQuery("SELECT c FROM Customer c LEFT JOIN FETCH c.addressId", Customer.class).getResultList();
+            List<Customer> customerList = new CustomerDAO().readTable();
 
             colCustomer_customerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             colCustomer_storeId.setCellValueFactory(new PropertyValueFactory<>("storeId"));
@@ -176,15 +170,6 @@ public class MainController implements Initializable {
 
             customerObservableList.addAll(customerList);
             tableCustomer.setItems(customerObservableList);
-
-            transaction.commit();
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            entityManager.close();
-        }
     }
 
     public void readFromFilm(){
