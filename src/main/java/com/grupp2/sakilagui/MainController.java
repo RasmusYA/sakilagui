@@ -251,6 +251,51 @@ public class MainController implements Initializable {
         }
     }
 
+    public void editFilmWindow() throws IOException {
+        if (selectedFilm == null) {
+            errorMessage("film");
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/grupp2/sakilagui/EditFilmWindow.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            EditFilmController editFilmController = fxmlLoader.getController();
+            editFilmController.setSelectedFilm(selectedFilm);
+            Stage stage = new Stage();
+            stage.setTitle("Edit " + selectedFilm.getTitle());
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
+
+    @FXML
+    private void removeActor(){
+        if (selectedActor == null) {
+            errorMessage("actor");
+        } else {
+            EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+            em.getTransaction().begin();
+            Actor actor = em.find(Actor.class, selectedActor.getActorId());
+            em.remove(actor);
+            em.getTransaction().commit();
+
+        }
+    }
+
+    @FXML
+    private void removeFilm(){
+        if (selectedFilm == null) {
+            errorMessage("film");
+        } else {
+            EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+            em.getTransaction().begin();
+            Film film = em.find(Film.class, selectedFilm.getFilmId());
+            em.remove(film);
+            em.getTransaction().commit();
+
+        }
+    }
+
+
     public void errorMessage(String selection){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");

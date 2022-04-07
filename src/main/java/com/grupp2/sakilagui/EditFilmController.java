@@ -1,12 +1,11 @@
 package com.grupp2.sakilagui;
 
-import com.grupp2.sakilagui.bs.Actor;
+import com.grupp2.sakilagui.bs.Film;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -19,21 +18,41 @@ public class EditFilmController implements Initializable {
     
     @FXML private Button closeButton;
 
-    @FXML private TextField actorFirstName;
-//    @FXML private CheckBox isInsideCheckBox;
-//    @FXML private ComboBox<Address> arenaComboBox;
 
-    @FXML private Actor selectedActor;
+    @FXML private TextField filmTitle;
+    @FXML private TextField filmDescription;
+    @FXML private TextField filmReleaseYear;
+    @FXML private TextField filmLanguage;
+    @FXML private TextField filmOriginalLanguage;
+    @FXML private TextField filmRentalDuration;
+    @FXML private TextField filmRating;
+    @FXML private TextField filmLength;
+    @FXML private TextField filmReplacementCost;
+    @FXML private TextField filmRentalRate;
+    @FXML private TextField filmSpecialFeatures;
+    @FXML private TextField filmLastUpdate;
 
-    public Actor getSelectedActor() {
-        return selectedActor;
+    @FXML private Film selectedFilm;
+
+    public Film getSelectedFilm() {
+        return selectedFilm;
     }
 
-    public void setSelectedActor(Actor selectedActor)  {
-        this.selectedActor = selectedActor;
-        actorFirstName.setText(selectedActor.getFirstName());
-//        isInsideCheckBox.setSelected(selectedArena.getIsInside());
-//        arenaComboBox.setValue(selectedArena.getAddress());
+    public void setSelectedFilm(Film selectedFilm)  {
+        this.selectedFilm = selectedFilm;
+        filmTitle.setText(selectedFilm.getTitle());
+        filmDescription.setText(selectedFilm.getDescription());
+        filmReleaseYear.setText(String.valueOf(selectedFilm.getReleaseYear()));
+        filmLanguage.setText(String.valueOf(selectedFilm.getLanguageId()));
+        filmOriginalLanguage.setText(String.valueOf(selectedFilm.getOriginalLanguageId()));
+        filmRentalDuration.setText(String.valueOf(selectedFilm.getRentalDuration()));
+        filmRating.setText(selectedFilm.getRating());
+        filmLength.setText(String.valueOf(selectedFilm.getLength()));
+        filmReplacementCost.setText(String.valueOf(selectedFilm.getReplacementCost()));
+        filmRentalRate.setText(String.valueOf(selectedFilm.getRentalRate()));
+        filmSpecialFeatures.setText(selectedFilm.getSpecialFeatures());
+        filmLastUpdate.setText(selectedFilm.getLastUpdate().toString());
+
     }
 
     @FXML
@@ -42,7 +61,7 @@ public class EditFilmController implements Initializable {
         stage.close();
     }
     @FXML
-    private void saveArenaWindow(){
+    private void saveFilm(){
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
 
@@ -50,8 +69,8 @@ public class EditFilmController implements Initializable {
             transaction = em.getTransaction();
             transaction.begin();
 
-            Actor actor = em.find(Actor.class, getSelectedActor().getActorId());
-            actor.setFirstName(actorFirstName.getText());
+            Film film = em.find(Film.class, getSelectedFilm().getFilmId());
+//            actor.setFirstName(actorFirstName.getText());
 //            arena.setInside(isInsideCheckBox.isSelected());
 //            arena.setAddress(arenaComboBox.getValue());
 //            arena.setInside(isInsideCheckBox.isSelected());
@@ -60,7 +79,6 @@ public class EditFilmController implements Initializable {
         } catch(Exception ex){
             if (transaction != null) {
                 transaction.rollback();
-                System.out.println(ex);
             }
         } finally{
             em.close();

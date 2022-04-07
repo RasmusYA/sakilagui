@@ -18,8 +18,8 @@ public class EditActorController implements Initializable {
     @FXML private Button closeButton;
 
     @FXML private TextField actorFirstName;
-//    @FXML private CheckBox isInsideCheckBox;
-//    @FXML private ComboBox<Address> arenaComboBox;
+    @FXML private TextField actorLastName;
+    @FXML private TextField actorLastUpdate;
 
     @FXML private Actor selectedActor;
 
@@ -30,8 +30,8 @@ public class EditActorController implements Initializable {
     public void setSelectedActor(Actor selectedActor)  {
         this.selectedActor = selectedActor;
         actorFirstName.setText(selectedActor.getFirstName());
-//        isInsideCheckBox.setSelected(selectedArena.getIsInside());
-//        arenaComboBox.setValue(selectedArena.getAddress());
+        actorLastName.setText(selectedActor.getLastName());
+        actorLastUpdate.setText(selectedActor.getLastUpdate().toString());
     }
 
     @FXML
@@ -40,7 +40,7 @@ public class EditActorController implements Initializable {
         stage.close();
     }
     @FXML
-    private void saveArenaWindow(){
+    private void saveActor(){
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
 
@@ -50,15 +50,13 @@ public class EditActorController implements Initializable {
 
             Actor actor = em.find(Actor.class, getSelectedActor().getActorId());
             actor.setFirstName(actorFirstName.getText());
-//            arena.setInside(isInsideCheckBox.isSelected());
-//            arena.setAddress(arenaComboBox.getValue());
-//            arena.setInside(isInsideCheckBox.isSelected());
+            actor.setLastName(actorLastName.getText());
+
             em.getTransaction().commit();
             closeWindow();
         } catch(Exception ex){
             if (transaction != null) {
                 transaction.rollback();
-                System.out.println(ex);
             }
         } finally{
             em.close();
