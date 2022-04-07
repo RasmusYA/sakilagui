@@ -37,9 +37,9 @@
    <center>
       <TabPane fx:id="mainTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="tabActor" text="Actor">
+          <Tab id="ActorView" fx:id="tabActor" text="Actor">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView id="ActorView" prefHeight="200.0" prefWidth="200.0">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Actor ID" />
                       <TableColumn prefWidth="190.0" text="First Name" />
@@ -49,7 +49,7 @@
                   </TableView>
                </content>
           </Tab>
-          <Tab fx:id="tabAddress" text="Address">
+          <Tab id="AddressView" fx:id="tabAddress" text="Address">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -65,7 +65,7 @@
                   </TableView>
                </content>
           </Tab>
-            <Tab fx:id="tabCategory" text="Category">
+            <Tab id="CategoryView" fx:id="tabCategory" text="Category">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -76,7 +76,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabCity" text="City">
+            <Tab id="CityView" fx:id="tabCity" text="City">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -88,7 +88,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabCountry" text="Country">
+            <Tab id="CountryView" fx:id="tabCountry" text="Country">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -99,7 +99,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabCustomer" text="Customer">
+            <Tab id="CustomerView" fx:id="tabCustomer" text="Customer">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -116,7 +116,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabFilm" text="Film">
+            <Tab id="FilmView" fx:id="tabFilm" text="Film">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -137,7 +137,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabFilmActor" text="Film Actor">
+            <Tab id="FilmActorView" fx:id="tabFilmActor" text="Film Actor">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -148,7 +148,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabFilmCategory" text="Film Category">
+            <Tab id="FilmCategoryView" fx:id="tabFilmCategory" text="Film Category">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -159,7 +159,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabFilmText" text="Film Text">
+            <Tab id="FilmTextView" fx:id="tabFilmText" text="Film Text">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -170,7 +170,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabInventory" text="Inventory">
+            <Tab id="InventoryView" fx:id="tabInventory" text="Inventory">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -182,7 +182,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabLanguage" text="Language">
+            <Tab id="LanguageView" fx:id="tabLanguage" text="Language">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -193,7 +193,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabPayment" text="Payment">
+            <Tab id="PaymentView" fx:id="tabPayment" text="Payment">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -208,7 +208,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabRental" text="Rental">
+            <Tab id="RentalView" fx:id="tabRental" text="Rental">
                <content>
                   <TableView fx:id="tableRental" prefHeight="200.0" prefWidth="200.0">
                     <columns>
@@ -223,7 +223,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="tabStaff" text="Staff">
+            <Tab id="StaffView" fx:id="tabStaff" text="Staff">
                <content>
                   <TableView prefHeight="200.0" prefWidth="200.0">
                     <columns>
