@@ -21,16 +21,18 @@
               <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" onAction="#quitApplication" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Actor">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#editActorWindow" text="Edit" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeActor" text="Remove" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Film">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#editFilmWindow" text="Edit" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeFilm" text="Remove" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
