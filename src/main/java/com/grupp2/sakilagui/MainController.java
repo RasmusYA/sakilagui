@@ -1,17 +1,20 @@
 package com.grupp2.sakilagui;
 
 import com.grupp2.sakilagui.bs.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +50,7 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Actor, String> colActor_lastName;
     @FXML private TableColumn<Actor, Date> colActor_lastUpdate;
     private ObservableList<Actor> actorObservableList = FXCollections.observableArrayList();
+    private Actor selectedActor;
 
     //Customer
     @FXML private Tab tabCustomer;
@@ -61,6 +65,7 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Customer, Date> colCustomer_createDate;
     @FXML private TableColumn<Customer, Date> colCustomer_lastUpdate;
     private ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
+    private Customer selectedCustomer;
 
     //Film
     @FXML private Tab tabFilm;
@@ -79,6 +84,7 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Film, Enum> colFilm_specialFeatures;
     @FXML private TableColumn<Film, Date> colFilm_lastUpdate;
     private ObservableList<Film> filmObservableList = FXCollections.observableArrayList();
+    private Film selectedFilm;
 
     //Rental
     @FXML private Tab tabRental;
@@ -91,12 +97,14 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Rental, Staff> colRental_staffId;
     @FXML private TableColumn<Rental, Date> colRental_lastUpdate;
     private ObservableList<Rental> rentalObservableList = FXCollections.observableArrayList();
+    private Rental selectedRental;
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hibernate");
 
     public void readFromRental(){
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
+        tableRental.getItems().clear();
         try {
             //
             transaction = entityManager.getTransaction();
@@ -131,6 +139,7 @@ public class MainController implements Initializable {
     public void readFromActor() {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
+        tableActor.getItems().clear();
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
@@ -157,6 +166,7 @@ public class MainController implements Initializable {
     public void readFromCustomer() {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
+        tableCustomer.getItems().clear();
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
@@ -190,6 +200,7 @@ public class MainController implements Initializable {
     public void readFromFilm(){
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
+        tableFilm.getItems().clear();
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
@@ -224,6 +235,31 @@ public class MainController implements Initializable {
         }
     }
 
+    public void editActorWindow() throws IOException {
+        if (selectedActor == null) {
+            errorMessage("actor");
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/grupp2/sakilagui/EditActorWindow.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            EditActorController editActorController = fxmlLoader.getController();
+            editActorController.setSelectedActor(selectedActor);
+            Stage stage = new Stage();
+            stage.setTitle("Edit " + selectedActor.getFirstName() + " " + selectedActor.getLastName());
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
+
+    public void errorMessage(String selection){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText("No " + selection + " is selected");
+        alert.setContentText("Please select a  " + selection + " before editing or removing!");
+
+        alert.showAndWait();
+    }
+
     public void quitApplication() {
         exitMenuButton.setOnAction((ActionEvent t) -> {
             System.exit(0);
@@ -232,6 +268,24 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //readFromRental();
+        tableActor.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            selectedActor = tableActor.getSelectionModel().getSelectedItem();
+            System.out.println(selectedActor.getFirstName() + " " + selectedActor.getLastName());
+        });
+
+        tableCustomer.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            selectedCustomer = tableCustomer.getSelectionModel().getSelectedItem();
+            System.out.println("Customer ID: " + selectedCustomer.getCustomerId() + ", Name: " + selectedCustomer.getFirstName());
+        });
+
+        tableFilm.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            selectedFilm = tableFilm.getSelectionModel().getSelectedItem();
+            System.out.println("Title: " + selectedFilm.getTitle());
+        });
+
+        tableRental.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            selectedRental = tableRental.getSelectionModel().getSelectedItem();
+            System.out.println("Rental ID: " + selectedRental.getRentalId() + ", Rental Date: " + selectedRental.getRentalDate());
+        });
     }
 }
