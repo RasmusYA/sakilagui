@@ -20,7 +20,7 @@ public class ActorDAO {
             transaction = entityManager.getTransaction();
             transaction.begin();
 
-            Query query = entityManager.createNativeQuery("SELECT * FROM actor WHERE actor_id > 197", Actor.class);
+            Query query = entityManager.createNativeQuery("SELECT * FROM actor WHERE actor_id > 11 AND actor_id < 15", Actor.class);
 
             list = query.getResultList();
 
@@ -122,25 +122,26 @@ public class ActorDAO {
 
         ActorDAO dao = new ActorDAO();
 
-        System.out.println(" Show table: ");
+//        System.out.println(" Show table: ");
+//        dao.showTableConsole(dao.readTable());
+//
+//        System.out.println(" Insert object: ");
+//        Actor actor = new Actor();
+//        actor.setFirstName("aaaa");
+//        actor.setLastName("bbbb");
+//        actor.setLastUpdate(Timestamp.from(Instant.now()));
+//        dao.insertObject(actor);
+//        dao.showTableConsole(dao.readTable());
+//
+//        System.out.println(" Update object: ");
+//        actor.setFirstName("cccc");
+//        actor.setLastName("dddd");
+//        dao.updateObject(actor, 201);
+//        dao.showTableConsole(dao.readTable());
+//
         dao.showTableConsole(dao.readTable());
-
-        System.out.println(" Insert object: ");
-        Actor actor = new Actor();
-        actor.setFirstName("aaaa");
-        actor.setLastName("bbbb");
-        actor.setLastUpdate(Timestamp.from(Instant.now()));
-        dao.insertObject(actor);
-        dao.showTableConsole(dao.readTable());
-
-        System.out.println(" Update object: ");
-        actor.setFirstName("cccc");
-        actor.setLastName("dddd");
-        dao.updateObject(actor, 201);
-        dao.showTableConsole(dao.readTable());
-
         System.out.println(" Remove object: ");
-        dao.removeObject(201);
+        dao.removeObject(13);
         dao.showTableConsole(dao.readTable());
 
     }

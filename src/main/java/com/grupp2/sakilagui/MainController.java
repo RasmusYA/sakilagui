@@ -272,12 +272,8 @@ public class MainController implements Initializable {
         if (selectedActor == null) {
             errorMessage("actor");
         } else {
-            EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-            em.getTransaction().begin();
-            Actor actor = em.find(Actor.class, selectedActor.getActorId());
-            em.remove(actor);
-            em.getTransaction().commit();
-
+            ActorDAO dao = new ActorDAO();
+            dao.removeObject(selectedActor.getActorId());
         }
     }
 
