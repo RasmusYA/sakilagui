@@ -143,4 +143,9 @@ public class Staff {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
+    @Override
+    public String toString() {
+        return staffId + " " + username;
+    }
 }

@@ -18,10 +18,11 @@ public class Store {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Staff> managerStaffId;       //	tinyint(3) unsigned	NO	UNI
 
-    // TODO Handle relation when Address is up
+
 //    @Column(name = "address_id")
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Address addressId;             //	smallint(5) unsigned	NO	MUL
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address addressId;             //	smallint(5) unsigned	NO	MUL
 
     @Column(name = "last_update")
     private Date lastUpdate;            //	timestamp	NO		current_timestamp()	on update current_timestamp()
@@ -46,14 +47,13 @@ public class Store {
         this.managerStaffId = managerStaffId;
     }
 
-    // TODO Handle relation when Address is up
-//    public Address getAddressId() {
-//        return addressId;
-//    }
-//
-//    public void setAddressId(Address addressId) {
-//        this.addressId = addressId;
-//    }
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
 
     public Date getLastUpdate() {
         return lastUpdate;
@@ -61,5 +61,10 @@ public class Store {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return storeId + "";
     }
 }

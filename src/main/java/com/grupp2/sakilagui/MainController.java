@@ -315,22 +315,22 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableActor.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             selectedActor = tableActor.getSelectionModel().getSelectedItem();
-            System.out.println(selectedActor.getFirstName() + " " + selectedActor.getLastName());
+            //System.out.println(selectedActor.getFirstName() + " " + selectedActor.getLastName());
         });
 
         tableCustomer.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             selectedCustomer = tableCustomer.getSelectionModel().getSelectedItem();
-            System.out.println("Customer ID: " + selectedCustomer.getCustomerId() + ", Name: " + selectedCustomer.getFirstName());
+            //System.out.println("Customer ID: " + selectedCustomer.getCustomerId() + ", Name: " + selectedCustomer.getFirstName());
         });
 
         tableFilm.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             selectedFilm = tableFilm.getSelectionModel().getSelectedItem();
-            System.out.println("Title: " + selectedFilm.getTitle());
+            //System.out.println("Title: " + selectedFilm.getTitle());
         });
 
         tableRental.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             selectedRental = tableRental.getSelectionModel().getSelectedItem();
-            System.out.println("Rental ID: " + selectedRental.getRentalId() + ", Rental Date: " + selectedRental.getRentalDate());
+            //System.out.println("Rental ID: " + selectedRental.getRentalId() + ", Rental Date: " + selectedRental.getRentalDate());
         });
     }
 }
