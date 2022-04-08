@@ -12,15 +12,15 @@ public class ActorDAO {
 
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hibernate");
 
-    public List<Object[]> readTable(){
+    public List<Actor> readTable(){
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
-        List<Object[]> list = null;
+        List<Actor> list = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
 
-            Query query = entityManager.createNativeQuery("SELECT * FROM actor WHERE actor_id > 197");
+            Query query = entityManager.createNativeQuery("SELECT * FROM actor WHERE actor_id > 197", Actor.class);
 
             list = query.getResultList();
 
@@ -37,13 +37,13 @@ public class ActorDAO {
         return list;
     }
 
-    public void showTableConsole(List<Object[]> list){
+    public void showTableConsole(List<Actor> list){
 
-        for (Object[] actor : list){
-            System.out.print("Actor Id: " + actor[0]);
-            System.out.print("  First name : " + actor[1]);
-            System.out.print("  Last name : " + actor[2]);
-            System.out.println("  Last update : " + actor[3]);
+        for (Actor actor : list){
+            System.out.print("Actor Id: " + actor.getActorId());
+            System.out.print("  First name : " + actor.getFirstName());
+            System.out.print("  Last name : " + actor.getLastName());
+            System.out.println("  Last update : " + actor.getLastUpdate());
         }
     }
 
@@ -142,7 +142,6 @@ public class ActorDAO {
         System.out.println(" Remove object: ");
         dao.removeObject(201);
         dao.showTableConsole(dao.readTable());
-
 
     }
 }
