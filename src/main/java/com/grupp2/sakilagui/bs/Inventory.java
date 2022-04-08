@@ -11,11 +11,10 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inventory_id")
     private int inventoryId;	    //mediumint(8) unsigned
-
-    // TODO Handle relation when Film class is up
-//    @Column(name = "payment_id")
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Film filmId;	        //smallint(5) unsigned
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id")
+    private Film filmId;	        //smallint(5) unsigned
 
     //@Column(name = "store_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -49,14 +48,14 @@ public class Inventory {
         this.inventoryId = inventoryId;
     }
 
-    // TODO Handle relation when Film class is up
-//    public Film getFilmId() {
-//        return filmId;
-//    }
-//
-//    public void setFilmId(Film filmId) {
-//        this.filmId = filmId;
-//    }
+    public Film getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(Film filmId) {
+        this.filmId = filmId;
+    }
+
 
 
     public Store getStoreId() {
@@ -74,4 +73,11 @@ public class Inventory {
     public void setLastUpdate(int lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
+    @Override
+    public String toString() {
+        return inventoryId + "";
+    }
+
+
 }
