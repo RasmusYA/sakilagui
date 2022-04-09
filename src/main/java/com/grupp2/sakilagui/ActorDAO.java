@@ -102,7 +102,12 @@ public class ActorDAO {
             transaction = entityManager.getTransaction();
             transaction.begin();
 
-            Query query = entityManager.createNativeQuery("DELETE FROM actor WHERE actor_Id = ?");
+            // Cascade doesn't work, it gives error, so first child table data has to be deleted.
+            Query query = entityManager.createNativeQuery("DELETE FROM film_actor WHERE actor_id = ?");
+            query.setParameter(1, id);
+            query.executeUpdate();
+
+            query = entityManager.createNativeQuery("DELETE FROM actor WHERE actor_Id = ?");
             query.setParameter(1, id);
             query.executeUpdate();
 
