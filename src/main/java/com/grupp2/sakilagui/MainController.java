@@ -289,6 +289,9 @@ public class MainController implements Initializable {
             } finally {
                 entityManager.close();
             }
+            ActorDAO dao = new ActorDAO();
+            dao.removeObject(selectedActor.getActorId());
+            readFromActor();
         }
     }
 

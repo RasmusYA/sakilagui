@@ -1,54 +1,153 @@
 package com.grupp2.sakilagui;
 
+import com.grupp2.sakilagui.bs.Actor;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.List;
 
-@Entity
-@Table(name= "actor")
 public class ActorDAO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long actorID;
+    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hibernate");
 
-    @Column(name="first_name")
-    String firstName; // VARCHAR(45) NOT NULL,
+    public List<Actor> readTable(){
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+        List<Actor> list = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
 
-    @Column(name="last_name")
-    String lastName; // VARCHAR(45) NOT NULL,
+            Query query = entityManager.createNativeQuery("SELECT * FROM actor WHERE actor_id > 11 AND actor_id < 15", Actor.class);
 
-    @Column(name="last_update")
-    Date lastUpdate; // TIMESTAMP; // NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            list = query.getResultList();
 
-    public long getActorID() {
-        return actorID;
+            transaction.commit();
+
+        }catch (Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
+        return list;
     }
 
-    public void setActorID(long actorID) {
-        this.actorID = actorID;
+    public void showTableConsole(List<Actor> list){
+
+        for (Actor actor : list){
+            System.out.print("Actor Id: " + actor.getActorId());
+            System.out.print("  First name : " + actor.getFirstName());
+            System.out.print("  Last name : " + actor.getLastName());
+            System.out.println("  Last update : " + actor.getLastUpdate());
+        }
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void insertObject(Actor actor){
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            entityManager.persist(actor);
+
+            transaction.commit();
+
+        }catch (Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void updateObject(Actor actorUp, int id){
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            Actor actor = entityManager.find(Actor.class, id);
+            actor.setFirstName(actorUp.getFirstName());
+            actor.setLastName(actorUp.getLastName());
+            actor.setLastUpdate(Timestamp.from(Instant.now()));
+
+            transaction.commit();
+
+        }catch (Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
     }
 
-    public String getLastName() {
-        return lastName;
+    public void removeObject(int id){
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction transaction = null;
+
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+
+            // Cascade doesn't work, it gives error, so first child table data has to be deleted.
+            Query query = entityManager.createNativeQuery("DELETE FROM film_actor WHERE actor_id = ?");
+            query.setParameter(1, id);
+            query.executeUpdate();
+
+            query = entityManager.createNativeQuery("DELETE FROM actor WHERE actor_Id = ?");
+            query.setParameter(1, id);
+            query.executeUpdate();
+
+            transaction.commit();
+
+        }catch (Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+        }
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public static void main(String[] args) {
 
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
+        ActorDAO dao = new ActorDAO();
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+//        System.out.println(" Show table: ");
+//        dao.showTableConsole(dao.readTable());
+//
+//        System.out.println(" Insert object: ");
+//        Actor actor = new Actor();
+//        actor.setFirstName("aaaa");
+//        actor.setLastName("bbbb");
+//        actor.setLastUpdate(Timestamp.from(Instant.now()));
+//        dao.insertObject(actor);
+//        dao.showTableConsole(dao.readTable());
+//
+//        System.out.println(" Update object: ");
+//        actor.setFirstName("cccc");
+//        actor.setLastName("dddd");
+//        dao.updateObject(actor, 201);
+//        dao.showTableConsole(dao.readTable());
+//
+        dao.showTableConsole(dao.readTable());
+        System.out.println(" Remove object: ");
+        dao.removeObject(13);
+        dao.showTableConsole(dao.readTable());
+
     }
 }
