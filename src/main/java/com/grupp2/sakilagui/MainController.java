@@ -274,6 +274,7 @@ public class MainController implements Initializable {
         } else {
             ActorDAO dao = new ActorDAO();
             dao.removeObject(selectedActor.getActorId());
+            readFromActor();
         }
     }
 
