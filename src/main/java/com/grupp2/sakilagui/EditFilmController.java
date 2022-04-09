@@ -70,10 +70,21 @@ public class EditFilmController implements Initializable {
             transaction.begin();
 
             Film film = em.find(Film.class, getSelectedFilm().getFilmId());
-//            actor.setFirstName(actorFirstName.getText());
-//            arena.setInside(isInsideCheckBox.isSelected());
-//            arena.setAddress(arenaComboBox.getValue());
-//            arena.setInside(isInsideCheckBox.isSelected());
+            film.setTitle(filmTitle.getText());
+            film.setDescription(filmDescription.getText());
+            film.setReleaseYear(Integer.parseInt(filmReleaseYear.getText()));
+            //film.setLanguageId(Integer.parseInt(filmLanguage.getText()));
+            //film.setOriginalLanguageId(Integer.parseInt(filmLanguage.getText()));
+            film.setRentalDuration(Integer.parseInt(filmRentalDuration.getText()));
+            film.setRating(filmRating.getText());
+            film.setLength(Integer.parseInt(filmLength.getText()));
+            film.setReplacementCost(Double.parseDouble(filmReplacementCost.getText()));
+
+            film.setRentalRate(Double.parseDouble(filmRentalRate.getText()));
+            film.setSpecialFeatures(filmSpecialFeatures.getText());
+            //film.setLastUpdate(filmLastUpdate.getText());
+
+
             em.getTransaction().commit();
             closeWindow();
         } catch(Exception ex){

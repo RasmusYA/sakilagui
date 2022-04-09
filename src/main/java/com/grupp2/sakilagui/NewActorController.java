@@ -1,28 +1,28 @@
-package edu.petersson.wigelltravels.controllers;
+package com.grupp2.sakilagui;
 
-import edu.petersson.wigelltravels.Address;
+import com.grupp2.sakilagui.bs.Actor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public class NewAddressController {
+public class NewActorController {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hibernate");
-    @FXML
-    private Button closeButton;
+    @FXML private Button closeButton;
 
-    @FXML private TextField streetNameLabel;
-    @FXML private TextField streetNumberLabel;
-    @FXML private TextField postCodeLabel;
-    @FXML private TextField townLabel;
+    @FXML private TextField actorFirstName;
+    @FXML private TextField actorLastName;
+    @FXML private TextField actorLastUpdate;
 
     @FXML
-    private void closeWindowButton() {
+    private void closeButton() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
@@ -36,16 +36,17 @@ public class NewAddressController {
             transaction = em.getTransaction();
             transaction.begin();
 
-            Address address = new Address();
-            address.setStreetName(streetNameLabel.getText());
-            address.setStreetNumber(streetNumberLabel.getText());
-            address.setPostCode(postCodeLabel.getText());
-            address.setTown(townLabel.getText());
+            Actor actor = new Actor();
+            actor.setFirstName(actorFirstName.getText());
+            actor.setLastName(actorLastName.getText());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            actor.setLastUpdate(date);
 
-            em.persist(address);
+            em.persist(actor);
             em.getTransaction().commit();
 
-            closeWindowButton();
+            closeButton();
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
