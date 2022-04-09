@@ -268,16 +268,27 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void removeActor(){
+    private void removeActor() {
         if (selectedActor == null) {
             errorMessage("actor");
         } else {
-            EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-            em.getTransaction().begin();
-            Actor actor = em.find(Actor.class, selectedActor.getActorId());
-            em.remove(actor);
-            em.getTransaction().commit();
+            EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+            EntityTransaction transaction = null;
+            try {
+                transaction = entityManager.getTransaction();
+                transaction.begin();
 
+                Actor actor = entityManager.find(Actor.class, selectedActor.getActorId());
+                entityManager.remove(actor);
+                entityManager.getTransaction().commit();
+
+            } catch (Exception ex) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            } finally {
+                entityManager.close();
+            }
         }
     }
 
@@ -286,15 +297,34 @@ public class MainController implements Initializable {
         if (selectedFilm == null) {
             errorMessage("film");
         } else {
-            EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-            em.getTransaction().begin();
-            Film film = em.find(Film.class, selectedFilm.getFilmId());
-            em.remove(film);
-            em.getTransaction().commit();
-
+            EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+            EntityTransaction transaction = null;
+            try {
+                transaction = entityManager.getTransaction();
+                transaction.begin();
+                Film film = entityManager.find(Film.class, selectedFilm.getFilmId());
+                entityManager.remove(film);
+                entityManager.getTransaction().commit();
+            } catch (Exception ex) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            } finally {
+                entityManager.close();
+            }
         }
     }
 
+    @FXML
+    public void NewActorWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/grupp2/sakilagui/NewActorWindow.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 329, 224);
+        Stage stage = new Stage();
+        stage.setTitle("New Actor");
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void errorMessage(String selection){
         Alert alert = new Alert(Alert.AlertType.ERROR);

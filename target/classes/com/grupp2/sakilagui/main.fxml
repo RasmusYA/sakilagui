@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupp2.sakilagui.MainController">
@@ -18,19 +19,21 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" onAction="#quitApplication" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Actor">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#editActorWindow" text="Edit" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeActor" text="Remove" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="Film">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#editFilmWindow" text="Edit" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeFilm" text="Remove" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
@@ -39,248 +42,670 @@
         <tabs>
           <Tab id="ActorView" fx:id="tabActor" text="Actor">
                <content>
-                  <TableView id="ActorView" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Actor ID" />
-                      <TableColumn prefWidth="190.0" text="First Name" />
-                        <TableColumn prefWidth="165.0" text="Last Name" />
-                        <TableColumn prefWidth="160.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView id="ActorView" fx:id="tableActor" prefHeight="612.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn fx:id="colActor_actorId" prefWidth="75.0" text="Actor ID" />
+                              <TableColumn fx:id="colActor_firstName" prefWidth="190.0" text="First Name" />
+                              <TableColumn fx:id="colActor_lastName" prefWidth="165.0" text="Last Name" />
+                              <TableColumn fx:id="colActor_lastUpdate" prefWidth="160.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#NewActorWindow" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#readFromActor" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#editActorWindow" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#removeActor" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
           </Tab>
           <Tab id="AddressView" fx:id="tabAddress" text="Address">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="97.0" text="Address ID" />
-                      <TableColumn prefWidth="158.0" text="Address" />
-                        <TableColumn prefWidth="142.0" text="Address 2" />
-                        <TableColumn prefWidth="105.0" text="District" />
-                        <TableColumn prefWidth="61.0" text="City ID" />
-                        <TableColumn prefWidth="104.0" text="Postal Code" />
-                        <TableColumn prefWidth="168.0" text="Phone" />
-                        <TableColumn prefWidth="154.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="612.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="97.0" text="Address ID" />
+                              <TableColumn prefWidth="158.0" text="Address" />
+                              <TableColumn prefWidth="142.0" text="Address 2" />
+                              <TableColumn prefWidth="105.0" text="District" />
+                              <TableColumn prefWidth="61.0" text="City ID" />
+                              <TableColumn prefWidth="104.0" text="Postal Code" />
+                              <TableColumn prefWidth="168.0" text="Phone" />
+                              <TableColumn prefWidth="154.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button12" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button22" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button32" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
           </Tab>
             <Tab id="CategoryView" fx:id="tabCategory" text="Category">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="165.0" text="Category ID" />
-                      <TableColumn prefWidth="155.0" text="Name" />
-                        <TableColumn prefWidth="123.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="612.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="165.0" text="Category ID" />
+                              <TableColumn prefWidth="155.0" text="Name" />
+                              <TableColumn prefWidth="123.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button13" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button23" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button33" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="CityView" fx:id="tabCity" text="City">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="City ID" />
-                      <TableColumn prefWidth="318.0" text="City" />
-                        <TableColumn prefWidth="98.0" text="Country ID" />
-                        <TableColumn prefWidth="213.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="610.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="City ID" />
+                              <TableColumn prefWidth="318.0" text="City" />
+                              <TableColumn prefWidth="98.0" text="Country ID" />
+                              <TableColumn prefWidth="213.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button14" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button24" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button34" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="CountryView" fx:id="tabCountry" text="Country">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Country ID" />
-                      <TableColumn prefWidth="410.0" text="Country" />
-                        <TableColumn prefWidth="147.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="615.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Country ID" />
+                              <TableColumn prefWidth="410.0" text="Country" />
+                              <TableColumn prefWidth="147.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button15" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button25" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button35" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="CustomerView" fx:id="tabCustomer" text="Customer">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="93.0" text="Customer ID" />
-                      <TableColumn prefWidth="66.0" text="Store ID" />
-                        <TableColumn prefWidth="180.0" text="First Name" />
-                        <TableColumn prefWidth="170.0" text="Last Name" />
-                        <TableColumn prefWidth="164.0" text="Email" />
-                        <TableColumn prefWidth="83.0" text="Address ID" />
-                        <TableColumn prefWidth="60.0" text="Active" />
-                        <TableColumn prefWidth="98.0" text="Create Date" />
-                        <TableColumn prefWidth="97.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView fx:id="tableCustomer" prefHeight="607.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn fx:id="colCustomer_customerId" prefWidth="93.0" text="Customer ID" />
+                              <TableColumn fx:id="colCustomer_storeId" prefWidth="66.0" text="Store ID" />
+                              <TableColumn fx:id="colCustomer_firstName" prefWidth="132.0" text="First Name" />
+                              <TableColumn fx:id="colCustomer_lastName" prefWidth="136.0" text="Last Name" />
+                              <TableColumn fx:id="colCustomer_email" prefWidth="196.0" text="Email" />
+                              <TableColumn fx:id="colCustomer_addressId" prefWidth="133.0" text="Address ID" />
+                              <TableColumn fx:id="colCustomer_active" prefWidth="60.0" text="Active" />
+                              <TableColumn fx:id="colCustomer_createDate" prefWidth="98.0" text="Create Date" />
+                              <TableColumn fx:id="colCustomer_lastUpdate" prefWidth="97.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#readFromCustomer" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="FilmView" fx:id="tabFilm" text="Film">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="67.0" text="Film ID" />
-                      <TableColumn prefWidth="83.0" text="Title" />
-                        <TableColumn prefWidth="75.0" text="Description" />
-                        <TableColumn prefWidth="75.0" text="Release Year" />
-                        <TableColumn prefWidth="75.0" text="Language ID" />
-                        <TableColumn prefWidth="75.0" text="Original Language ID" />
-                        <TableColumn prefWidth="75.0" text="Rental Duration" />
-                        <TableColumn prefWidth="96.0" text="Rental Rate" />
-                        <TableColumn prefWidth="54.0" text="Length" />
-                        <TableColumn prefWidth="75.0" text="Replacement Cost" />
-                        <TableColumn prefWidth="75.0" text="Rating" />
-                        <TableColumn prefWidth="107.0" text="Special Features" />
-                        <TableColumn prefWidth="78.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView fx:id="tableFilm" prefHeight="611.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn fx:id="colFilm_filmId" prefWidth="67.0" text="Film ID" />
+                              <TableColumn fx:id="colFilm_title" prefWidth="113.0" text="Title" />
+                              <TableColumn fx:id="colFilm_description" prefWidth="83.0" text="Description" />
+                              <TableColumn fx:id="colFilm_releaseYear" prefWidth="67.0" text="Release Year" />
+                              <TableColumn fx:id="colFilm_languageId" prefWidth="72.0" text="Language ID" />
+                              <TableColumn fx:id="colFilm_originalLanguageId" prefWidth="48.0" text="Original Language ID" />
+                              <TableColumn fx:id="colFilm_rentalDuration" prefWidth="75.0" text="Rental Duration" />
+                              <TableColumn fx:id="colFilm_rentalRate" prefWidth="96.0" text="Rental Rate" />
+                              <TableColumn fx:id="colFilm_Length" prefWidth="54.0" text="Length" />
+                              <TableColumn fx:id="colFilm_replacementCost" prefWidth="75.0" text="Replacement Cost" />
+                              <TableColumn fx:id="colFilm_rating" prefWidth="75.0" text="Rating" />
+                              <TableColumn fx:id="colFilm_specialFeatures" prefWidth="121.0" text="Special Features" />
+                              <TableColumn fx:id="colFilm_lastUpdate" prefWidth="77.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#readFromFilm" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#editFilmWindow" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#removeFilm" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="FilmActorView" fx:id="tabFilmActor" text="Film Actor">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="133.0" text="Actor ID" />
-                      <TableColumn prefWidth="349.0" text="Film ID" />
-                        <TableColumn prefWidth="252.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="615.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="133.0" text="Actor ID" />
+                              <TableColumn prefWidth="349.0" text="Film ID" />
+                              <TableColumn prefWidth="252.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button18" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button28" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button38" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="FilmCategoryView" fx:id="tabFilmCategory" text="Film Category">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Film ID" />
-                      <TableColumn prefWidth="256.0" text="Category ID" />
-                        <TableColumn prefWidth="304.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="609.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Film ID" />
+                              <TableColumn prefWidth="256.0" text="Category ID" />
+                              <TableColumn prefWidth="304.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button19" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button191" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button291" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button391" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="FilmTextView" fx:id="tabFilmText" text="Film Text">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="161.0" text="Film ID" />
-                      <TableColumn prefWidth="302.0" text="Title" />
-                        <TableColumn prefWidth="380.0" text="Description" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="610.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="161.0" text="Film ID" />
+                              <TableColumn prefWidth="302.0" text="Title" />
+                              <TableColumn prefWidth="380.0" text="Description" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button19" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button29" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button39" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="InventoryView" fx:id="tabInventory" text="Inventory">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="150.0" text="Inventory ID" />
-                      <TableColumn minWidth="0.0" prefWidth="176.0" text="Film ID" />
-                        <TableColumn prefWidth="131.0" text="Store ID" />
-                        <TableColumn prefWidth="158.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="613.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="150.0" text="Inventory ID" />
+                              <TableColumn minWidth="0.0" prefWidth="176.0" text="Film ID" />
+                              <TableColumn prefWidth="131.0" text="Store ID" />
+                              <TableColumn prefWidth="158.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button110" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button210" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button310" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="LanguageView" fx:id="tabLanguage" text="Language">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="130.0" text="Language ID" />
-                      <TableColumn prefWidth="206.0" text="Name" />
-                        <TableColumn prefWidth="256.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="612.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="130.0" text="Language ID" />
+                              <TableColumn prefWidth="206.0" text="Name" />
+                              <TableColumn prefWidth="256.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button111" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button211" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button311" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="PaymentView" fx:id="tabPayment" text="Payment">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="113.0" text="Payment ID" />
-                      <TableColumn prefWidth="141.0" text="Customer ID" />
-                        <TableColumn prefWidth="115.0" text="Staff ID" />
-                        <TableColumn prefWidth="114.0" text="Rental ID" />
-                        <TableColumn prefWidth="142.0" text="Amount" />
-                        <TableColumn prefWidth="163.0" text="Payment Date" />
-                        <TableColumn prefWidth="182.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="613.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="113.0" text="Payment ID" />
+                              <TableColumn prefWidth="141.0" text="Customer ID" />
+                              <TableColumn prefWidth="115.0" text="Staff ID" />
+                              <TableColumn prefWidth="114.0" text="Rental ID" />
+                              <TableColumn prefWidth="142.0" text="Amount" />
+                              <TableColumn prefWidth="163.0" text="Payment Date" />
+                              <TableColumn prefWidth="182.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button112" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button212" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button312" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="RentalView" fx:id="tabRental" text="Rental">
                <content>
-                  <TableView fx:id="tableRental" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn fx:id="colRental_Id" prefWidth="75.0" text="ID" />
-                      <TableColumn fx:id="colRental_date" prefWidth="171.0" text="Rental Date" />
-                        <TableColumn fx:id="colRental_inventoryId" prefWidth="128.0" text="Inventory ID" />
-                        <TableColumn fx:id="colRental_customerId" prefWidth="128.0" text="Customer ID" />
-                        <TableColumn fx:id="colRental_returnDate" prefWidth="151.0" text="Return Date" />
-                        <TableColumn fx:id="colRental_staffId" prefWidth="95.0" text="Staff ID" />
-                        <TableColumn fx:id="colRental_lastUpdate" prefWidth="177.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView fx:id="tableRental" prefHeight="610.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn fx:id="colRental_Id" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="colRental_date" prefWidth="171.0" text="Rental Date" />
+                              <TableColumn fx:id="colRental_inventoryId" prefWidth="116.0" text="Inventory ID" />
+                              <TableColumn fx:id="colRental_customerId" prefWidth="195.0" text="Customer ID" />
+                              <TableColumn fx:id="colRental_returnDate" prefWidth="143.0" text="Return Date" />
+                              <TableColumn fx:id="colRental_staffId" prefWidth="95.0" text="Staff ID" />
+                              <TableColumn fx:id="colRental_lastUpdate" prefWidth="182.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#readFromRental" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button213" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button313" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="StaffView" fx:id="tabStaff" text="Staff">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Staff ID" />
-                      <TableColumn prefWidth="106.0" text="First Name" />
-                        <TableColumn prefWidth="100.0" text="Last Name" />
-                        <TableColumn prefWidth="76.0" text="Address ID" />
-                        <TableColumn prefWidth="88.0" text="Picture" />
-                        <TableColumn prefWidth="135.0" text="Email" />
-                        <TableColumn prefWidth="63.0" text="Store ID" />
-                        <TableColumn prefWidth="60.0" text="Active" />
-                        <TableColumn prefWidth="109.0" text="Username" />
-                        <TableColumn prefWidth="84.0" text="Password" />
-                        <TableColumn prefWidth="102.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="614.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Staff ID" />
+                              <TableColumn prefWidth="106.0" text="First Name" />
+                              <TableColumn prefWidth="100.0" text="Last Name" />
+                              <TableColumn prefWidth="76.0" text="Address ID" />
+                              <TableColumn prefWidth="88.0" text="Picture" />
+                              <TableColumn prefWidth="135.0" text="Email" />
+                              <TableColumn prefWidth="63.0" text="Store ID" />
+                              <TableColumn prefWidth="60.0" text="Active" />
+                              <TableColumn prefWidth="109.0" text="Username" />
+                              <TableColumn prefWidth="84.0" text="Password" />
+                              <TableColumn prefWidth="102.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button114" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button214" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button314" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab fx:id="tabStore" text="Store">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Store ID" />
-                      <TableColumn prefWidth="201.0" text="Manager Staff ID" />
-                        <TableColumn prefWidth="154.0" text="Address ID" />
-                        <TableColumn prefWidth="202.0" text="Last Update" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView prefHeight="611.0" prefWidth="1024.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Store ID" />
+                              <TableColumn prefWidth="201.0" text="Manager Staff ID" />
+                              <TableColumn prefWidth="154.0" text="Address ID" />
+                              <TableColumn prefWidth="202.0" text="Last Update" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
+                           <children>
+                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button115" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button215" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="button315" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
         </tabs>
       </TabPane>
    </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="button" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Read">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="button2" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="button3" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Delete">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-   </bottom>
 </BorderPane>
