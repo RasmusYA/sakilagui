@@ -602,7 +602,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="button213" mnemonicParsing="false" onAction="#editRentalWindow" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
+                              <Button fx:id="button213" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Update">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
