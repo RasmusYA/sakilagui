@@ -1,7 +1,7 @@
 package com.grupp2.sakilagui.bs;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "rental")
@@ -13,10 +13,11 @@ public class Rental {
     private int rentalId;      //	int(11)	NO	PRI		auto_increment
 
     @Column(name = "rental_date")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date rentalDate;      //	datetime	NO	MUL
 
-//    //@Column(name = "inventory_id")
+
+    //    //@Column(name = "inventory_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_id")
     private Inventory inventoryId;      //	mediumint(8) unsigned	NO	MUL
@@ -26,7 +27,7 @@ public class Rental {
     private Customer customerId;      //	smallint(5) unsigned	NO	MUL
 
     @Column(name = "return_date")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date returnDate;      //	datetime	YES
 
     //@Column(name = "staffId")
@@ -36,7 +37,7 @@ public class Rental {
 
 
     @Column(name = "last_update")
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date lastUpdate;      //	timestamp	NO		current_timestamp()	on update current_timestamp()
 
     public Rental(){
@@ -102,7 +103,7 @@ public class Rental {
     @Override
     public String toString() {
         return rentalId + " " +
-                 rentalDate + " " +
+                rentalDate + " " +
                 inventoryId + " " +
                 customerId + " " +
                 returnDate + " " +
