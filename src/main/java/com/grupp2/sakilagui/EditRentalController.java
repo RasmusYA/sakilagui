@@ -50,6 +50,7 @@ public class EditRentalController implements Initializable {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
+
     @FXML
     private void saveRental(){
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();

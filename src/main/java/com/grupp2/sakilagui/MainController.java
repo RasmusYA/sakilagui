@@ -251,6 +251,7 @@ public class MainController implements Initializable {
         }
     }
 
+
     public void editRentalWindow() throws IOException {
         if (selectedRental == null) {
             errorMessage("rental");

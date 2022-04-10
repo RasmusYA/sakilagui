@@ -588,6 +588,7 @@
                               <TableColumn fx:id="colRental_returnDate" prefWidth="143.0" text="Return Date" />
                               <TableColumn fx:id="colRental_staffId" prefWidth="95.0" text="Staff ID" />
                               <TableColumn fx:id="colRental_lastUpdate" prefWidth="182.0" text="Last Update" />
+
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">

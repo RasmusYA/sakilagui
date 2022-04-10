@@ -16,6 +16,7 @@ public class Rental {
     //@Temporal(TemporalType.DATE)
     private Date rentalDate;      //	datetime	NO	MUL
 
+
 //    //@Column(name = "inventory_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_id")
