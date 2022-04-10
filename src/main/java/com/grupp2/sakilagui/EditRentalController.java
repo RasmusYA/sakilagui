@@ -1,7 +1,6 @@
 package com.grupp2.sakilagui;
 
-import com.grupp2.sakilagui.bs.Actor;
-import com.grupp2.sakilagui.bs.Rental;
+import com.grupp2.sakilagui.bs.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,8 +40,9 @@ public class EditRentalController implements Initializable {
         this.selectedRental = selectedRental;
         rentalRentalDate.setValue(selectedRental.getRentalDate().toLocalDate());
         rentalInventoryId.setText(Integer.toString((selectedRental.getInventoryId().getInventoryId())));
-
+        rentalCustomerId.setText(Integer.toString((selectedRental.getCustomerId().getCustomerId())));
         rentalReturnDate.setValue(selectedRental.getReturnDate().toLocalDate());
+        rentalStaffId.setText(Integer.toString((selectedRental.getStaffId().getStaffId())));
     }
 
     @FXML
@@ -61,7 +61,13 @@ public class EditRentalController implements Initializable {
 
             Rental rental = em.find(Rental.class, getSelectedRental().getRentalId());
             rental.setRentalDate(Date.valueOf(rentalRentalDate.getValue()));
+            Inventory inventori = em.find(Inventory.class, Integer.parseInt(rentalInventoryId.getText()));
+            rental.setInventoryId(inventori);
+            Customer customer = em.find(Customer.class, Integer.parseInt(rentalCustomerId.getText()));
+            rental.setCustomerId(customer);
             rental.setReturnDate(Date.valueOf(rentalReturnDate.getValue()));
+            Staff staff = em.find(Staff.class, Integer.parseInt(rentalStaffId.getText()));
+            rental.setStaffId(staff);
 
             em.getTransaction().commit();
             closeWindow();

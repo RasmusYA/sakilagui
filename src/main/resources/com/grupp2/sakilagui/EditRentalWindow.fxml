@@ -26,9 +26,15 @@
         </rowConstraints>
          <children>
              <Label prefHeight="18.0" prefWidth="110.0" text="Rental date" />
-             <Label prefHeight="18.0" prefWidth="110.0" text="Return date" GridPane.rowIndex="1" />
              <DatePicker fx:id="rentalRentalDate" GridPane.columnIndex="1" />
-             <DatePicker fx:id="rentalReturnDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+             <Label prefHeight="18.0" prefWidth="110.0" text="Inventory Id" GridPane.rowIndex="1" />
+             <TextField fx:id="rentalInventoryId" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+             <Label prefHeight="18.0" prefWidth="110.0" text="Customer Id" GridPane.rowIndex="2" />
+             <TextField fx:id="rentalCustomerId" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+             <Label prefHeight="18.0" prefWidth="110.0" text="Return date" GridPane.rowIndex="3" />
+             <DatePicker fx:id="rentalReturnDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+             <Label prefHeight="18.0" prefWidth="110.0" text="Staff Id" GridPane.rowIndex="4" />
+             <TextField fx:id="rentalStaffId" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" top="10.0" />
