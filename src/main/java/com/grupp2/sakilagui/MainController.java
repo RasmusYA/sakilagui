@@ -291,9 +291,9 @@ public class MainController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();
 
             EditRentalController editRentalController = fxmlLoader.getController();
-            //editRentalController.getSelectedRental(selectedRental);
+            editRentalController.setSelectedRental(selectedRental);
             Stage stage = new Stage();
-            stage.setTitle("Edit " + selectedRental.getRentalId());
+            stage.setTitle("Update Rental id " + selectedRental.getRentalId());
             stage.setScene(new Scene(root));
             stage.show();
         }
