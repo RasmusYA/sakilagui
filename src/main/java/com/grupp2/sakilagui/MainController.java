@@ -267,6 +267,38 @@ public class MainController implements Initializable {
         }
     }
 
+    public void editCustomerWindow() throws IOException {
+        if (selectedCustomer == null) {
+            errorMessage("customer");
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/grupp2/sakilagui/EditCustomerWindow.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            EditCustomerController editCustomerController = fxmlLoader.getController();
+            //editCustomerController.getSelectedCustomer(selectedCustomer);
+            Stage stage = new Stage();
+            stage.setTitle("Edit " + selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
+
+    public void editRentalWindow() throws IOException {
+        if (selectedRental == null) {
+            errorMessage("rental");
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/grupp2/sakilagui/EditRentalWindow.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            EditRentalController editRentalController = fxmlLoader.getController();
+            //editRentalController.getSelectedRental(selectedRental);
+            Stage stage = new Stage();
+            stage.setTitle("Edit " + selectedRental.getRentalId());
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
+
     @FXML
     private void removeActor() {
         if (selectedActor == null) {
