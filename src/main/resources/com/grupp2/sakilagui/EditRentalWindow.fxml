@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="224.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.petersson.wigellsconcert.controllers.EditConcertController">
+<AnchorPane prefHeight="224.0" prefWidth="329.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.grupp2.sakilagui.EditRentalController">
    <children>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="329.0">
         <columnConstraints>
@@ -25,20 +25,16 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Artist" />
-            <Label text="Date" GridPane.rowIndex="1" />
-            <Label text="Price" GridPane.rowIndex="2" />
-            <Label text="Arena" GridPane.rowIndex="3" />
-            <TextField fx:id="artistNameLabel" GridPane.columnIndex="1" />
-            <DatePicker fx:id="dateDatePicker" prefHeight="26.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="ticketPriceLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ComboBox fx:id="arenas" prefHeight="26.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+             <Label prefHeight="18.0" prefWidth="110.0" text="Rental date" />
+             <Label prefHeight="18.0" prefWidth="110.0" text="Return date" GridPane.rowIndex="1" />
+             <DatePicker fx:id="rentalRentalDate" GridPane.columnIndex="1" />
+             <DatePicker fx:id="rentalReturnDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" top="10.0" />
          </padding>
       </GridPane>
-      <Button layoutX="261.0" layoutY="177.0" mnemonicParsing="false" onAction="#SaveWindow" text="Save" />
+      <Button layoutX="261.0" layoutY="177.0" mnemonicParsing="false" onAction="#saveRental" text="Save" />
       <Button fx:id="closeButton" layoutX="192.0" layoutY="177.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
    </children>
 </AnchorPane>

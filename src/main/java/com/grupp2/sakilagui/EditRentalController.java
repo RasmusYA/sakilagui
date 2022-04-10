@@ -1,9 +1,11 @@
 package com.grupp2.sakilagui;
 
 import com.grupp2.sakilagui.bs.Actor;
+import com.grupp2.sakilagui.bs.Rental;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -12,6 +14,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.net.URL;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class EditRentalController implements Initializable {
@@ -19,21 +25,24 @@ public class EditRentalController implements Initializable {
     
     @FXML private Button closeButton;
 
-    @FXML private TextField actorFirstName;
-//    @FXML private CheckBox isInsideCheckBox;
-//    @FXML private ComboBox<Address> arenaComboBox;
+    @FXML private DatePicker rentalRentalDate;
+    @FXML private TextField rentalInventoryId;
+    @FXML private TextField rentalCustomerId;
+    @FXML private DatePicker rentalReturnDate;
+    @FXML private TextField rentalStaffId;
 
-    @FXML private Actor selectedActor;
+    @FXML private Rental selectedRental;
 
-    public Actor getSelectedActor() {
-        return selectedActor;
+    public Rental getSelectedRental() {
+        return selectedRental;
     }
 
-    public void setSelectedActor(Actor selectedActor)  {
-        this.selectedActor = selectedActor;
-        actorFirstName.setText(selectedActor.getFirstName());
-//        isInsideCheckBox.setSelected(selectedArena.getIsInside());
-//        arenaComboBox.setValue(selectedArena.getAddress());
+    public void setSelectedRental(Rental selectedRental)  {
+        this.selectedRental = selectedRental;
+        rentalRentalDate.setValue(selectedRental.getRentalDate().toLocalDate());
+        rentalInventoryId.setText(Integer.toString((selectedRental.getInventoryId().getInventoryId())));
+
+        rentalReturnDate.setValue(selectedRental.getReturnDate().toLocalDate());
     }
 
     @FXML
@@ -42,7 +51,7 @@ public class EditRentalController implements Initializable {
         stage.close();
     }
     @FXML
-    private void saveArenaWindow(){
+    private void saveRental(){
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction transaction = null;
 
@@ -50,11 +59,10 @@ public class EditRentalController implements Initializable {
             transaction = em.getTransaction();
             transaction.begin();
 
-            Actor actor = em.find(Actor.class, getSelectedActor().getActorId());
-            actor.setFirstName(actorFirstName.getText());
-//            arena.setInside(isInsideCheckBox.isSelected());
-//            arena.setAddress(arenaComboBox.getValue());
-//            arena.setInside(isInsideCheckBox.isSelected());
+            Rental rental = em.find(Rental.class, getSelectedRental().getRentalId());
+            rental.setRentalDate(Date.valueOf(rentalRentalDate.getValue()));
+            rental.setReturnDate(Date.valueOf(rentalReturnDate.getValue()));
+
             em.getTransaction().commit();
             closeWindow();
         } catch(Exception ex){
