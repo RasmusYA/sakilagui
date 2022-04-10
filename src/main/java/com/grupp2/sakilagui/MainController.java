@@ -305,8 +305,40 @@ public class MainController implements Initializable {
             try {
                 transaction = entityManager.getTransaction();
                 transaction.begin();
-                Film film = entityManager.find(Film.class, selectedFilm.getFilmId());
-                entityManager.remove(film);
+
+                // Cascade for delete is restrict, so child table data has to be deleted first.
+                Query query = entityManager.createNativeQuery("DELETE payment FROM payment " +
+                        "INNER JOIN rental ON payment.rental_id = rental.rental_id " +
+                        "INNER JOIN inventory ON rental.inventory_id = inventory.inventory_id " +
+                        "AND inventory.film_id = ?");
+                query.setParameter(1, selectedFilm.getFilmId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE rental FROM rental " +
+                        "INNER JOIN inventory ON rental.inventory_id = inventory.inventory_id " +
+                        "AND inventory.film_id = ?;");
+                query.setParameter(1, selectedFilm.getFilmId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM inventory WHERE film_id = ?");
+                query.setParameter(1, selectedFilm.getFilmId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM film_actor WHERE film_id = ?");
+                query.setParameter(1, selectedFilm.getFilmId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM film_category WHERE film_id = ?");
+                query.setParameter(1, selectedFilm.getFilmId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM film WHERE film_id = ?");
+                query.setParameter(1, selectedFilm.getFilmId());
+                query.executeUpdate();
+
+                //Film film = entityManager.find(Film.class, selectedFilm.getFilmId());
+                //entityManager.remove(film);
+
                 entityManager.getTransaction().commit();
             } catch (Exception ex) {
                 if (transaction != null) {
@@ -315,6 +347,77 @@ public class MainController implements Initializable {
             } finally {
                 entityManager.close();
             }
+            readFromFilm();
+        }
+    }
+
+    @FXML
+    private void removeCustomer(){
+        if (selectedCustomer == null) {
+            errorMessage("customer");
+        } else {
+            EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+            EntityTransaction transaction = null;
+            try {
+                transaction = entityManager.getTransaction();
+                transaction.begin();
+
+                // Cascade for delete is restrict, so child table data has to be deleted first.
+                Query query = entityManager.createNativeQuery("DELETE FROM payment WHERE customer_id = ?");
+                query.setParameter(1, selectedCustomer.getCustomerId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM rental WHERE customer_id = ?");
+                query.setParameter(1, selectedCustomer.getCustomerId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM customer WHERE customer_id = ?");
+                query.setParameter(1, selectedCustomer.getCustomerId());
+                query.executeUpdate();
+
+                entityManager.getTransaction().commit();
+
+            } catch (Exception ex) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            } finally {
+                entityManager.close();
+            }
+            readFromCustomer();
+        }
+    }
+
+    @FXML
+    private void removeRental(){
+        if (selectedRental == null) {
+            errorMessage("customer");
+        } else {
+            EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+            EntityTransaction transaction = null;
+            try {
+                transaction = entityManager.getTransaction();
+                transaction.begin();
+
+                // Cascade for delete is restrict, so child table data has to be deleted first.
+                Query query = entityManager.createNativeQuery("DELETE FROM payment WHERE rental_id = ?");
+                query.setParameter(1, selectedRental.getRentalId());
+                query.executeUpdate();
+
+                query = entityManager.createNativeQuery("DELETE FROM rental WHERE rental_id = ?");
+                query.setParameter(1, selectedRental.getRentalId());
+                query.executeUpdate();
+
+                entityManager.getTransaction().commit();
+
+            } catch (Exception ex) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+            } finally {
+                entityManager.close();
+            }
+            readFromRental();
         }
     }
 
