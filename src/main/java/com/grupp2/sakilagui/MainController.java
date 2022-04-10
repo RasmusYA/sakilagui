@@ -251,6 +251,22 @@ public class MainController implements Initializable {
         }
     }
 
+    public void editRentalWindow() throws IOException {
+        if (selectedRental == null) {
+            errorMessage("rental");
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/grupp2/sakilagui/EditRentalWindow.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            EditRentalController editRentalController = fxmlLoader.getController();
+            editRentalController.setSelectedRental(selectedRental);
+            Stage stage = new Stage();
+            stage.setTitle("Update Rental id " + selectedRental.getRentalId());
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+    }
+
     public void editFilmWindow() throws IOException {
         if (selectedFilm == null) {
             errorMessage("film");
