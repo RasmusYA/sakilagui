@@ -275,7 +275,7 @@ public class MainController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();
 
             EditCustomerController editCustomerController = fxmlLoader.getController();
-            //editCustomerController.getSelectedCustomer(selectedCustomer);
+            editCustomerController.setSelectedCustomer(selectedCustomer);
             Stage stage = new Stage();
             stage.setTitle("Edit " + selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
             stage.setScene(new Scene(root));
