@@ -464,6 +464,17 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    public void newRentalWindow() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/com/grupp2/sakilagui/NewRentalWindow.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 329, 224);
+        Stage stage = new Stage();
+        stage.setTitle("New Rental");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void errorMessage(String selection){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");

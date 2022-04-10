@@ -592,7 +592,7 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
                            <children>
-                              <Button fx:id="button1" mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                              <Button fx:id="button113" mnemonicParsing="false" onAction="#newRentalWindow" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
