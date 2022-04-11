@@ -261,7 +261,7 @@
                         </TableView>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0" style="-fx-background-color: #3d3d3d;">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
+                              <Button mnemonicParsing="false" onAction="#editCustomerWindowCreate" prefHeight="55.0" prefWidth="80.0" style="-fx-background-color: e6ed18;" text="Create">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
