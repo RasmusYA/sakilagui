@@ -267,6 +267,18 @@ public class MainController implements Initializable {
         }
     }
 
+    public void editCustomerWindowCreate() throws IOException {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/grupp2/sakilagui/EditCustomerWindow.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+
+            EditCustomerController editCustomerController = fxmlLoader.getController();
+            //editCustomerController.setSelectedCustomer(new Customer());
+            Stage stage = new Stage();
+            stage.setTitle("New entry");
+            stage.setScene(new Scene(root));
+            stage.show();
+    }
+
     public void editCustomerWindow() throws IOException {
         if (selectedCustomer == null) {
             errorMessage("customer");
